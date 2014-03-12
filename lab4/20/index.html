@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 4
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 4: A string set using an array (graded)
+</h2>
+
+<h3>
+Wednesday, February 12
+</h3>
+
+This laboratory assignment will be graded in numerical points.  For this 
+laboratory, unlike the pass/fail laboratories, you are expected to work alone, 
+without any help from others.  You may consult your notes, your previous work 
+and any printed materials, but no Internet access is allowed, except for the 
+course website.  Hand in your solution by the end of the laboratory period.
+
+<h3>
+Objectives
+</h3>
+
+The objective of this laboratory is to evaluate your skills concerning
+<ul>
+<li>basic object-oriented Java programming with an array, and
+<li>implementation of a set of strings that supports five basic 
+  operations, namely, testing emptiness, testing membership, addition, 
+  removal and printing.
+</ul>
+
+<h3>
+1. Preparation
+</h3>
+
+First, copy the following two <tt>.java</tt> files into your disk space.  To 
+do this, you will need to be on this Laboratory 4 webpage and follow the links 
+provided below.
+
+<blockquote>
+<a href="ArrayStringSet.java"><tt>ArrayStringSet.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a>
+</blockquote>
+
+You are to complete the class <tt>ArrayStringSet</tt> according to the 
+specifications given below.  The class <tt>Tester</tt> has been completed. 
+
+<h3>
+2. The class <tt>ArrayStringSet</tt>
+</h3>
+
+Last week, you implemented a set of strings using a linked list.  This week, 
+you will implement a set of strings using an array.  The class 
+<tt>ArrayStringSet</tt> supports the following five operations for a set of 
+strings <tt>A</tt> and a string <tt>s</tt>.
+
+<ol>
+<li><tt>A.isEmpty()</tt>&mdash;returns <tt>true</tt> if <tt>A</tt> is empty 
+  and <tt>false</tt> otherwise.
+<li><tt>A.has(s)</tt>&mdash;returns <tt>true</tt> if <tt>A</tt> has 
+  <tt>s</tt> and <tt>false</tt> otherwise.
+<li><tt>A.add(s)</tt>&mdash;adds <tt>s</tt> to <tt>A</tt> (if <tt>A</tt> does 
+  not already have <tt>s</tt>).
+<li><tt>A.remove(s)</tt>&mdash;removes <tt>s</tt> from <tt>A</tt> (if 
+  <tt>A</tt> has <tt>s</tt>).
+<li><tt>A.print()</tt>&mdash;prints all the elements of <tt>A</tt>.
+</ol>
+
+<b>Fields.</b>
+This class has two fields, <tt>elements</tt> and <tt>size</tt>, as shown 
+below.  The field <tt>elements</tt> refers to an <tt>String</tt> array that 
+stores the strings of a set.  The field <tt>size</tt> is an <tt>int</tt> 
+variable to keep track of the size of a set (i.e., the number of strings in 
+a set).  The size of the array <tt>elements</tt> is always fixed by the 
+constant <tt>MAX_SIZE</tt>.
+
+<blockquote>
+<pre>
+private int elements[];
+private int size;
+</pre>
+</blockquote>
+
+For this implementation, you must store strings in contiguous cells starting 
+from the first cell (whose index is 0).  At any time, the elements of a set 
+must be all distinct; that is, there should not be more than one string of 
+the same value.  
+
+<p>
+<b>Methods.</b>
+There are five <tt>public</tt> methods that correspond to the five operations 
+defined above.  There is also an additional <tt>private</tt> method named 
+<tt>find()</tt> defined as follows:
+<blockquote>
+<pre>
+private int find(String s)
+</pre>
+</blockquote>
+This method should return the <tt>int</tt> index of a string <tt>s</tt> in the 
+array <tt>elements[]</tt> if it exists or <tt>-1</tt> if it does not.  To test 
+the equality of strings <tt>s</tt> and <tt>t</tt>, use
+<blockquote>
+<pre>
+s.equals(t)
+</pre>
+</blockquote>
+The method <tt>find()</tt> should be used in the methods <tt>has()</tt> and 
+<tt>remove()</tt>.  The constructor and the methods <tt>isEmpty()</tt> and 
+<tt>print()</tt> are already completed.  You are to implement the remaining 
+four methods.  
+
+<p>
+<b>Keeping the elements distinct.</b>
+Because the elements must always be distinct, the method <tt>add()</tt> should 
+check, before attempting to add a string <tt>s</tt> to a set <tt>A</tt>, 
+whether or not <tt>s</tt> already exists in <tt>A</tt>; if so, there is no 
+need to actually add <tt>s</tt> to <tt>A</tt>.  
+
+<p>
+<b>Keeping the elements in order.</b>
+As in <a href="../../lab3/">Laboratory 3</a>, the methods <tt>add()</tt> and 
+<tt>remove()</tt> should also maintain the elements sorted in the alphabetical 
+order.  For this, rather than sorting all the elements, modify the methods in 
+the following way:  <i>The method</i> <tt>add()</tt> <i>first adds 
+a string</i> <tt>s</tt> <i>at the index</i> <tt>size</tt> <i>and then, if 
+necessary, moves</i> <tt>s</tt> <i>down the array by successively swapping 
+adjacent elements until the array is sorted.  The method</i> 
+<tt>remove()</tt> <i>first replaces the element to be removed by the 
+largest element from the index</i> <tt>size-1</tt> <i>and then, if necessary, 
+moves the largest element up the array by successively swapping adjacent 
+elements until the array is sorted.</i>  As before, to compare if a string 
+<tt>s</tt> lexicographically follows a string <tt>t</tt>, use
+<blockquote>
+<pre>
+s.compareTo(t)
+</pre>
+</blockquote>
+The above expression is a positive integer if <tt>s</tt> lexicographically 
+follows <tt>t</tt>.
+
+<p>
+<b>Testing correctness.</b>
+The class <tt>Tester</tt> is a test driver application.  Use this to test the 
+correctness of your <tt>ArrayStringSet</tt> class.  The class <tt>Tester</tt> 
+is already completed, so you should not have to make any more modifications. 
+Save a snapshot of your test run in a text file named <tt>lab4.out</tt>. 
+
+<h3>
+3. Documentation with Javadoc
+</h3>
+
+As done before, document your code using Javadoc tags.  For more details about 
+Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+4. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>ArrayStringSet.java</tt> and 
+<tt>lab4.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

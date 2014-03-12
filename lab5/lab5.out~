@@ -1,0 +1,34 @@
+mliu2@netlab04:~/Documents/CPSC-215/lab5$ java CheckBraces UnmatchedBrace.java 
+/**
+ * This class has an unmatched brace.
+ */
+
+public class UnmatchedBrace {
+  int arr[] = new int[25];
+  public UnmatchedBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k} = 10;
+  }
+}
+Unmatched brace at character 223: Found } expecting ].
+
+mliu2@netlab04:~/Documents/CPSC-215/lab5$ java CheckBraces MissingBrace.java 
+/**
+ * This class has a missing brace.
+ */
+
+public class MissingBrace }
+  int arr[] = new int[25];
+  public MissingBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+Unmatched brace at character 70: No opening brace for }.
+

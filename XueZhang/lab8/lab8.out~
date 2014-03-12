@@ -1,0 +1,7 @@
+ycai2@syslab05:/home3/ycai2/cpsc215/lab8$ javac *.java
+Note: ArrayIndexList.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+ycai2@syslab05:/home3/ycai2/cpsc215/lab8$ java Tester
+Testing with a list of strings...
+[T, R, I, N, I, T, Y]
+

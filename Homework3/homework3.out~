@@ -1,0 +1,56 @@
+				RED,1
+Encryption order = REDABCFGHIJKLMNOPQSTUVWXYZ
+Decryption order = defcbghijklmnopqrastuvwxyz
+TGB BRFKB HS HM OKRY; LBBT RT INB'S.
+the eagle is in play; meet at joe's.
+
+				GREY,3
+Encryption order = XZGREYABCDFHIJKLMNOPQSTUVW
+Decryption order = ghijekclmnopqrstudvwxyzafb
+PBE EXAHE CO CJ LHXV; IEEP XP DKE'O.
+the eagle is in play; meet at joe's.
+
+				BLUE,5
+Encryption order = WXYZBLUEACDFGHIJKMNOPQRSTV
+Decryption order = iejkhlmnopqfrstuvwxygzabcd
+OEB BWUFB AN AH JFWT; GBBO WO CIB'N.
+the eagle is in play; meet at joe's.
+
+				BLACK,12
+Encryption order = PQRSTUVWXYZBLACKDEFGHIJMNO
+Decryption order = nloqrstuvwpmxyzabcdefghijk
+GWT TPVBT XF XA KBPN; LTTG PG YCT'F.
+the eagle is in play; meet at joe's.
+
+				WHITE,20
+Encryption order = CDFGJKLMNOPQRSUVXYZWHITEAB
+Decryption order = yzabxcduvefghijklmnwoptqrs
+WMJ JCLQJ NZ NS VQCA; RJJW CW OUJ'Z.
+the eagle is in play; meet at joe's.
+
+Invalid Keys:
+
+				AMBER,0
+Exception in thread "main" KeywordException: Invalid rotate amount 0
+	at MyCaesar.<init>(MyCaesar.java:28)
+	at MyCaesar.main(MyCaesar.java:123)
+
+				Pink,4
+Exception in thread "main" KeywordException: Keyword must be in uppercase
+	at MyCaesar.<init>(MyCaesar.java:45)
+	at MyCaesar.main(MyCaesar.java:123)
+	
+	ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFG,5
+Exception in thread "main" KeywordException: Invalid keyword length 33
+	at MyCaesar.<init>(MyCaesar.java:35)
+	at MyCaesar.main(MyCaesar.java:123)
+				
+				PURPLE,5
+Exception in thread "main" KeywordException: Keyword has duplicate letter: P
+	at MyCaesar.<init>(MyCaesar.java:54)
+	at MyCaesar.main(MyCaesar.java:123)
+	
+				!@#$,6
+Exception in thread "main" KeywordException: Keyword must be in english letters
+	at MyCaesar.<init>(MyCaesar.java:47)
+	at MyCaesar.main(MyCaesar.java:123)

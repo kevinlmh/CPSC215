@@ -1,0 +1,157 @@
+<html>
+
+<head>
+<title>Java Insertion Sort</title>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name="AUTHOR" content="BLADEK">
+<meta name="OPERATOR" content="EdCC">
+<style type = "text/css">
+	body {font-family: "Times New Roman, serif"; font-size: 14}
+</style>
+
+</head>
+
+<body>
+<a href="#top"></a>
+
+<p><font face="Arial,Helvetica" size="7">Java
+<font color="#000080">insertion sort</font></font></p>
+
+<p><font face="Courier New"><font color="#008080">/**<br>
+&nbsp;* Insertion Sort example<br>
+&nbsp;* @author Paul Bladek<br>
+&nbsp;*/</font><br>
+public class InsertionSortTest<br>
+{ <br>
+&nbsp;&nbsp;&nbsp;&nbsp; <font color="#008080">/**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * @param args the command line arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp; public static void main(String[] args)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String[] stringArray = {<font color="#800080">&quot;beta&quot;</font>,
+<font color="#800080">&quot;gamma&quot;</font>, <font color="#800080">&quot;alpha&quot;</font>,
+<font color="#800080">&quot;epsilon&quot;</font>, <font color="#800080">&quot;delta&quot;</font>};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#008080">// 
+test array</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(<font color="#800080">&quot;Unsorted 
+array:&quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(String element: 
+stringArray)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+System.out.print(element + <font color="#800080">&quot; &quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println();<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>insertionSort(stringArray);</b><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(<font color="#800080">&quot;Sorted 
+array:&quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(String element: 
+stringArray)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+System.out.print(element +<font color="#800080"> &quot; &quot;</font>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println();<br>
+&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; /**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Insertion Sort for any Comparable Objects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * @param array the array to sort<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */</font><br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; </font>static void 
+insertionSort(Comparable[] array)<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; </font>{<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+Comparable temp;<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+for(int i = 1; i &lt; array.length; i++) <font color="#008080">// ar[i] is element 
+to insert</font><br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>{<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+temp = array[i];<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+int j = 0;<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+for(j = i; j &gt; 0; j--)<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+if(temp.compareTo(array[j - 1]) &lt; 0)<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+array[j] = array[j - 1];<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+break;<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>
+array[j] = temp;<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </font>}<br>
+<font color="#008080">&nbsp;&nbsp;&nbsp;&nbsp; </font>}<br>
+}</font></p>
+
+<div align="center">
+  <center>
+  <table border="2" cellpadding="4" cellspacing="1">
+    <tr>
+      <td width="20%" bgcolor="#CCFFFF"><b><font size="2">beginning</font></b></td>
+      <td width="20%" bgcolor="#CCFFFF"><b><font size="2">after pass 1</font></b></td>
+      <td width="20%" bgcolor="#CCFFFF"><b><font size="2">after pass 2</font></b></td>
+      <td width="20%" bgcolor="#CCFFFF"><b><font size="2">after pass 3</font></b></td>
+      <td width="20%" bgcolor="#CCFFFF"><b><font size="2">after pass 4</font></b></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#FFFFCC">&quot;beta&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;beta&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;alpha&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;alpha&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;alpha&quot;</td>
+    </tr>
+    <tr>
+      <td width="20%">&quot;gamma&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;gamma&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;beta&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;beta&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;beta&quot;</td>
+    </tr>
+    <tr>
+      <td width="20%">&quot;alpha&quot;</td>
+      <td width="20%">&quot;alpha&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;gamma&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;epsilon&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;delta&quot;</td>
+    </tr>
+    <tr>
+      <td width="20%">&quot;epsilon&quot;</td>
+      <td width="20%">&quot;epsilon&quot;</td>
+      <td width="20%">&quot;epsilon&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;gamma&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;epsilon&quot;</td>
+    </tr>
+    <tr>
+      <td width="20%">&quot;delta&quot;</td>
+      <td width="20%">&quot;delta&quot;</td>
+      <td width="20%">&quot;delta&quot;</td>
+      <td width="20%">&quot;delta&quot;</td>
+      <td width="20%" bgcolor="#FFFFCC">&quot;gamma&quot;</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+<p><a href="#top"><img src="../images/topb.gif" alt="[Top]" border="0" width="78" height="33"></a>
+<a href="../default.htm">
+<img src="../images/indexb.gif" alt="[Index]" border="0" width="78" height="33"></a>
+<a href="default.htm">
+<img src="../images/syllabus.gif" alt="[syllabus]" align="top" border="0" width="78" height="33"></a>
+</p>
+<p><a href="http://www.edcc.edu/">
+<img src="../images/edcc.gif" alt="[Edmonds Community College]" hspace="10" border="0" align="right" width="360" height="35"></a></p>
+<hr>
+<div align="left">
+  <address>
+    For Further information, contact <a href="mailto:pbladek@edcc.edu">pbladek@edcc.edu</a>
+  </address>
+</div>
+<font size="2"><script language="JavaScript">
+    var theDate = document.lastModified;
+    document.write("This page last updated:  " + theDate);
+</script><br>
+copyright©2001,2002, 2011Edmonds Community College</font> </p>
+</body>
+</html>

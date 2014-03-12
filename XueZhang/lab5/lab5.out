@@ -1,0 +1,49 @@
+ycai2@syslab20:/home3/ycai2/cpsc215/lab5$ javac CheckBraces.java
+^[[Aycai2@syslab20:/home3/ycai2/cpsc215/lab5$ java CheckBraces ValidClass.java
+/**
+ * This is a valid class.
+ */
+
+public class ValidClass {
+  int arr[] = new int[25];
+  public ValidClass() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+ycai2@syslab20:/home3/ycai2/cpsc215/lab5$ java CheckBraces UnmatchedBrace.java
+/**
+ * This class has an unmatched brace.
+ */
+
+public class UnmatchedBrace {
+  int arr[] = new int[25];
+  public UnmatchedBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k} = 10;
+  }
+}
+Unmatched brace at character 223: Found } expecting ].
+ycai2@syslab20:/home3/ycai2/cpsc215/lab5$ java CheckBraces MissingBrace.java
+/**
+ * This class has a missing brace.
+ */
+
+public class MissingBrace }
+  int arr[] = new int[25];
+  public MissingBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+Unmatched brace at character 70: No opening brace for }.
+

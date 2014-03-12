@@ -1,0 +1,20 @@
+Adding 8 to the beginning of the list..
+[8]
+Adding 5 after p1
+[8, 5]
+Adding 3 before p2
+[8, 3, 5]
+Adding 9 to the beginning of the list...
+[9, 8, 3, 5]
+Removing the first element of the list...
+[8, 3, 5]
+Setting p3 to 7
+[8, 7, 5]
+Printing every other element in the list...
+[8, 5]
+Adding 2 after the first element...
+[8, 2, 7, 5]
+Printing the list in reverse order...
+[5, 7, 2, 8]
+Printing every other element in the list...
+[8, 7]

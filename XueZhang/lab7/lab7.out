@@ -1,0 +1,27 @@
+
+p1(DNode@24c21495)
+[8]
+p2(DNode@40a0dcd9)
+[8, 5]
+p3(DNode@1034bb5)
+Iterator/ Reverse Element Iterator/ Every Other Element Iterator: 
+[8, 3, 5]
+[5, 3, 8]
+[8, 5]
+p2(DNode@40a0dcd9)
+Iterator/ Reverse Element Iterator/ Every Other Element Iterator: 
+[9, 8, 3, 5]
+[5, 3, 8, 9]
+[9, 3]
+Removing first element: 9
+[8, 3, 5]
+Replacing 3 with 7
+Iterator/ Reverse Element Iterator/ Every Other Element Iterator: 
+[8, 7, 5]
+[5, 7, 8]
+[8, 5]
+Adding 2 after first element...
+Iterator/ Reverse Element Iterator/ Every Other Element Iterator: 
+[8, 2, 7, 5]
+[5, 7, 2, 8]
+[8, 7]

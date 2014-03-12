@@ -1,0 +1,145 @@
+/**
+ * This class implements a set of strings using a linked list to support five 
+ * operations, namely, testing emptiness, membership, insertion, removal, and 
+ * printing.
+ */
+
+public class StringSet {
+    
+  private Node head;
+  private int size;                       // The actual size
+
+  /**
+   * Creates an empty list and initializes the set's size to 0 (i.e., it 
+   * creates an empty set).
+   */
+  public StringSet() {
+    head = null;
+    size = 0;
+  } 
+
+  /**
+   * Returns true if the set contains no element.
+   */
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
+  /**
+   * Returns, if it exists, a node containing a string s.
+   */
+  private Node find(String s) {
+  
+    // Fill in the blank here.
+    Node v = head;
+    while (v != null) {
+    	if (v .getElement().equals(s)) {
+    		return v;
+    	}else {
+    		v = v.getNext();
+    	}
+  	}
+  	return null;
+  }
+
+  /**
+   * Returns true if the set contains a string s.
+   */
+  public boolean contains(String s) {
+
+    // Fill in the blank here.
+    Node r = find(s);
+    if (r == null) {
+    	return false;
+    }else {
+    	return true;
+    }
+
+  }
+
+  /**
+   * Inserts a string s into the list and increments size by 1.
+   */
+  public void insert(String s) {
+
+    if (!contains(s)) {
+    	Node ins = new Node(s,null);
+    	Node prev = null;
+    	Node cur = head;
+    	while (ins.getElement.compareTo(n) <= 0) {
+    		prev = cur;
+    		cur = cur.getNext();
+    	}
+    	prev.setNext(ins);
+    	ins.setNext(cur);
+    	
+		/*if (head == null) {
+			head = ins;
+		} else if (head.getNext() == null) {
+			if (head.getElement().compareTo(s) >= 0) {
+					head.setNext(ins);
+			}else {
+					ins.setNext(head);
+					head = ins;
+			}
+		} else {
+			Node prev = null;
+			Node next = head;
+			while (next != null && next.getElement().compareTo(s) >= 0) {
+			  	prev = next;
+			  	next = next.getNext();
+			}
+			if (next == null) {
+				prev.setNext(ins);
+			}else {
+			  	prev.setNext(ins);
+			  	ins.setNext(next);
+			}
+			
+		}*/
+		
+			
+		System.out.println("Inserting " + s + "...");
+    }
+    else
+      System.out.println("Inserting " + s + "..., but " + s + 
+                         " already exists.");
+  }
+
+  /**
+   * Removes a string s from the list and decrements size by 1.
+   */
+  public void remove(String s) {
+    Node r = find(s);
+    if (r == null) 
+      System.out.println("Removing " + s + "..., but " + s +
+		         " does not exist.");
+    else {
+
+      // Fill in the blank here.
+      Node prev = head;
+      while (prev != null && prev.getNext() != r) {
+      	prev = prev.getNext();
+      }
+      prev.setNext(r.getNext());
+
+      System.out.println("Removing " + s + "...");
+    }
+  }
+
+  /**
+   * Prints all the strings in the list.
+   */
+  public void print() {
+    Node n = head;
+    System.out.print("{ ");
+    while (n != null) {
+      System.out.print(n.getElement());
+      if (n.getNext() != null) 
+	System.out.print(", ");
+      n = n.getNext();
+    }
+    System.out.println(" }");
+  }
+
+}

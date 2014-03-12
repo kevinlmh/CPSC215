@@ -1,0 +1,22 @@
+Putting: gamma  100
+Putting: phi  101
+Putting: beta  102
+Putting: alpha  103
+Putting: delta  104
+Putting: lambda  105
+Putting: epsilon  106
+Putting: zeta  107
+Key set:  alpha beta delta epsilon gamma lambda phi zeta 
+Values:  103 102 104 106 100 105 101 107 
+Entry Set:  [alpha,103][beta,102][delta,104][epsilon,106][gamma,100][lambda,105][phi,101][zeta,107]
+
+Key set:  
+107
+Entry does not exist. Adding [Yisheng, 163]
+
+Key set:  Yisheng alpha beta delta epsilon gamma lambda phi zeta 
+
+Removing phi and delta......
+
+Key set:  Yisheng alpha beta epsilon gamma lambda zeta 
+

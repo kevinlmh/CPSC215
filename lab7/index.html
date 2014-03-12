@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 7
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 7: The ADT binary tree and interators
+</h2>
+
+<h3>
+Wednesday, March 12<br>
+Thursday, March 13
+</h3>
+
+As before, you are expected to work with an assigned partner as a pair.  Both 
+you and your partner will receive the same grade.  Both of you should always 
+save your laboratory work on your own accounts. 
+
+<h3>
+Objectives
+</h3>
+
+Recall that <i>iterable</i> ADTs are those that support the method 
+<tt>iterator()</tt>; for example, the ADT node list is iterable.  This week, 
+you will implement and use the ADT binary tree as an iterable ADT.  
+
+<h3>
+1. Preparation
+</h3>
+
+This assignment builds on the class <tt>LinkedBinaryTree</tt> discussed in 
+&sect;7.3.4, pp. 305&ndash;313, of our main textbook.  First, create a 
+directory named <tt>lab7</tt> and download the following JAR (Java ARchive) 
+file by clicking the link provided.  To do this, you need to be on this 
+Laboratory 7 webpage.
+
+<blockquote>
+<a href="lab7.jar"><tt>lab7.jar</tt></a>
+</blockquote>
+
+Once you have downloaded the archive, type the following command from the 
+<tt>lab7</tt> directory.
+
+<blockquote>
+<tt>jar xvf lab7.jar</tt>
+</blockquote>
+
+Your directory should now contain the following nineteen <tt>.java</tt> files.
+
+<blockquote>
+<a href="BTNode.java"><tt>BTNode.java</tt></a><br>
+<a href="BTPosition.java"><tt>BTPosition.java</tt></a><br>
+<a href="BinaryTree.java"><tt>BinaryTree.java</tt></a><br>
+<a href="BoundaryViolationException.java"><tt>BoundaryViolationException.java</tt></a><br>
+<a href="DNode.java"><tt>DNode.java</tt></a><br>
+<a href="ElementIterator.java"><tt>ElementIterator.java</tt></a><br>
+<a href="EmptyListException.java"><tt>EmptyListException.java</tt></a><br>
+<a href="EmptyTreeException.java"><tt>EmptyTreeException.java</tt></a><br>
+<a href="InvalidPositionException.java"><tt>InvalidPositionException.java</tt></a><br>
+<a href="Iterable.java"><tt>Iterable.java</tt></a><br>
+<a href="Iterator.java"><tt>Iterator.java</tt></a><br>
+<a href="LinkedBinaryTree.java"><tt>LinkedBinaryTree.java</tt></a><br>
+<a href="NoSuchElementException.java"><tt>NoSuchElementException.java</tt></a><br>
+<a href="NodePositionList.java"><tt>NodePositionList.java</tt></a><br>
+<a href="NonEmptyTreeException.java"><tt>NonEmptyTreeException.java</tt></a><br>
+<a href="Position.java"><tt>Position.java</tt></a><br>
+<a href="PositionList.java"><tt>PositionList.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a><br>
+<a href="Tree.java"><tt>Tree.java</tt></a>
+</blockquote>
+
+All but the classes <tt>LinkedBinaryTree</tt> and <tt>Tester</tt> are 
+completed.
+
+<h3>
+2. The ADT binary tree
+</h3>
+
+Complete the implementation of the given class <tt>LinkedBinaryTree</tt>.  
+This class is identical to the class <tt>LinkedBinaryTree</tt> given in 
+&sect;7.3.4, pp. 308&ndash;312, of our main textbook.  This class consists of 
+the following 21 methods (excluding three auxiliary methods).
+
+<ol>
+<li><tt>size()</tt>&mdash;returns the number of elements of the tree.
+<li><tt>isEmpty()</tt>&mdash;determines if the tree is empty.
+<li><tt>iterator()</tt>&mdash;returns an iterator of the elements stored in 
+  the tree in preorder.
+<li><tt>positions()</tt>&mdash;returns an iterable collection of the nodes in 
+  preorder.
+<li><tt>replace(v, e)</tt>&mdash;replaces with an element <tt>e</tt> the 
+  element stored at a node <tt>v</tt>.
+<li><tt>root()</tt>&mdash;returns the root of the tree.
+<li><tt>parent(v)</tt>&mdash;returns the parent of a node <tt>v</tt>.
+<li><tt>children(v)</tt>&mdash;returns an iterable collection of the 
+  children of a node <tt>v</tt>.
+<li><tt>sibling(v)</tt>&mdash;returns the sibling of a node <tt>v</tt>.
+<li><tt>isInternal(v)</tt>&mdash;returns whether a node <tt>v</tt> is 
+  internal.
+<li><tt>isExternal(v)</tt>&mdash;returns whether a node <tt>v</tt> is 
+  external.
+<li><tt>isRoot(v)</tt>&mdash;returns whether a node <tt>v</tt> is the root.
+<li><tt>left(v)</tt>&mdash;returns the left child of a node <tt>v</tt>.
+<li><tt>right(v)</tt>&mdash;returns the right child of a node <tt>v</tt>.
+<li><tt>hasLeft(v)</tt>&mdash;returns whether a node <tt>v</tt> has a left 
+  child.
+<li><tt>hasRight(v)</tt>&mdash;returns whether a node <tt>v</tt> has a right 
+  child.
+<li><tt>addRoot(e)</tt>&mdash;creates and returns a new node <tt>r</tt> with 
+  an element <tt>e</tt>, making <tt>r</tt> the root.
+<li><tt>insertLeft(v, e)</tt>&mdash;creates and returns a new node <tt>w</tt>
+  with an element <tt>e</tt>, making <tt>w</tt> the left child of a node 
+  <tt>v</tt>.
+<li><tt>insertRight(v, e)</tt>&mdash;creates and returns a new node <tt>w</tt>
+  with an element <tt>e</tt>, making <tt>w</tt> the right child of a node 
+  <tt>v</tt>.
+<li><tt>remove(v)</tt>&mdash;removes a node <tt>v</tt>, replaces it with its 
+  child, if any, and returns the element stored at <tt>v</tt>.
+<li><tt>attach(v, T1, T2)</tt>&mdash;attaches trees <tt>T1</tt> and 
+  <tt>T2</tt>, respectively, as the left and right subtrees of an external 
+  node <tt>v</tt>.
+</ol>
+
+All but the methods <tt>isExternal()</tt>, <tt>right()</tt>, 
+<tt>hasRight()</tt> and <tt>insertRight()</tt> are implemented.  You are to 
+implement the remaining four methods.  
+
+<h3>
+3. Preorder traversal
+</h3>
+
+In the file <tt>Tester.java</tt>, complete the method 
+<tt>preorderPrint()</tt> to print all the elements of a given binary tree in 
+preorder.  This method should call the class <tt>LinkedBinaryTree</tt>'s 
+method <tt>iterator()</tt>.  In the <tt>main()</tt> method, use the tree 
+from Figure 7.11, p. 301, of our main textbook as an example to test your 
+implementation.  Save a snapshot of your test run in a text file named 
+<tt>lab7.out</tt>. 
+
+<h3>
+4. Indented parenthetic string representations
+</h3>
+
+The <i>indented parenthetic string representation</i> of a tree <i>T</i> is a 
+variant of the parenthetic string representation of <i>T</i> that uses 
+indentation and line breaks as illustrated in Figure 7.21, p. 330, of our 
+main textbook.  In the file <tt>Tester.java</tt>, complete the method 
+<tt>IPSR()</tt> to return the indented parenthetic string representation of 
+a given tree.  Your method must work with not only binary trees but also any 
+trees.  You are free to define auxiliary methods.  In the <tt>main()</tt> 
+method, use the tree from Figure 7.11, p. 301, of our main textbook as an 
+example to test your implementation.  Save a snapshot of your test run in the
+file <tt>lab7.out</tt>. 
+
+<h3>
+5. Documentation with Javadoc
+</h3>
+
+As done before, document your <tt>LinkedBinaryTree.java</tt> and 
+<tt>Tester.java</tt> files using Javadoc tags.  For more details about 
+Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+6. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>LinkedBinaryTree.java</tt>, 
+<tt>Tester.java</tt> and <tt>lab7.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

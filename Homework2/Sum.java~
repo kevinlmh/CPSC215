@@ -1,0 +1,40 @@
+/**
+ * Sum progression.
+ *
+ * @author: Kevin Liu
+ * @see Progression
+ */
+
+class Sum extends Progression {
+
+  /** Previous value. */
+  long sum;
+
+  // Inherits variables first and cur.
+
+  /** Default constructor setting 1 as the first value. */
+  Sum() {
+    this(1);
+  }
+
+  /** Parametric constructor providing the first value.
+   *
+   * @param value first value.
+   */
+   Sum (long value) {
+    first = value;
+    sum = first;
+  }
+
+  /** Adds all previous values to the current value.
+   *
+   * @return next value of the progression
+   */
+  protected long nextValue() {
+    cur = sum;
+    sum += cur;
+    return cur;
+  }
+  
+  // Inherits methods firstValue() and printProgression(int).
+}

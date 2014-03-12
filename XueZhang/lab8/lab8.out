@@ -1,0 +1,27 @@
+ycai2@syslab05:/home3/ycai2/cpsc215/lab8$ javac *.java
+Note: ArrayIndexList.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+ycai2@syslab05:/home3/ycai2/cpsc215/lab8$ java Tester
+Testing with a list of strings...
+[T, R, I, N, I, T, Y]
+
+
+ycai2@syslab05:/home3/ycai2/cpsc215/lab8$ java Tester
+Testing with a list of strings...
+[T, R, I, N, I, T, Y]
+This list has duplicates.
+Removing duplicates...
+[T, R, I, N, Y]
+
+Testing with another list of strings...
+[Z, T, V, A, P, D, H, N, P, L, V, X, I, S, D, T, Y, A, N, W, Q, A, A, A, Q, R]
+This list has duplicates.
+Removing duplicates...
+[Z, T, V, A, P, D, H, N, L, X, I, S, Y, W, Q, R]
+
+Testing with a list of integers...
+[1823, 1823, 1823, 1823, 1823, 1823, 1823, 1823, 1823, 1823]
+This list has duplicates.
+Removing duplicates...
+[1823]
+

@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 5
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 5: Braces matching
+</h2>
+
+<h3>
+Wednesday, February 19<br>
+Thursday, February 20
+</h3>
+
+As before, you are expected to work with an assigned partner as a pair.  Both 
+you and your partner will receive the same grade.  Both of you should always 
+save your laboratory work on your own accounts. 
+
+<h3>
+Objectives
+</h3>
+
+The objectives of this laboratory are
+<ul>
+<li>to familiarize yourself with the ADT stack and its array-based 
+  implementation using generics, and
+<li>to implement a command-line program that will check Java source 
+  code for matching braces of three kinds, namely, &ldquo;(&rdquo;, 
+  &ldquo;)&rdquo;, &ldquo;{&rdquo;, &ldquo;}&rdquo; and &ldquo;[&rdquo;, 
+  &ldquo;]&rdquo;.  
+</ul>
+
+<h3>
+1. Preparation
+</h3>
+
+This assignment builds on the class <tt>ArrayStack</tt> discussed in 
+&sect;5.1.2, pp. 206&ndash;210, of our main textbook.  First, copy the 
+following five <tt>.java</tt> files into your disk space.  To do this, you 
+will need to be on this Laboratory 5 webpage and follow the links provided 
+below.
+
+<blockquote>
+<a href="ArrayStack.java"><tt>ArrayStack.java</tt></a><br>
+<a href="CheckBraces.java"><tt>CheckBraces.java</tt></a><br>
+<a href="EmptyStackException.java"><tt>EmptyStackException.java</tt></a><br>
+<a href="FullStackException.java"><tt>FullStackException.java</tt></a><br>
+<a href="Stack.java"><tt>Stack.java</tt></a>
+</blockquote>
+
+When you compile <tt>ArrayStack.java</tt> for the first time, you will see
+
+<blockquote>
+<pre>
+Note: ArrayStack.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+</pre>
+</blockquote>
+
+This is just a warning that <tt>ArrayStack.java</tt> uses an unspecified 
+(generic) type.  It is not an error message.
+
+<h3>
+2. Braces matching
+</h3>
+
+In every Java expression, each opening brace must be matched with a closing 
+brace of the same kind.  In particular, every opening &ldquo;(&rdquo;, 
+&ldquo;{&rdquo;, &ldquo;[&rdquo; must be closed by its matching 
+&ldquo;)&rdquo;, &ldquo;}&rdquo;, &ldquo;]&rdquo;, respectively, before a 
+previously opened &ldquo;(&rdquo;, &ldquo;{&rdquo; or &ldquo;[&rdquo; is 
+closed.  You are to write a command-line program that will read a Java 
+source file and checks if all the opening and closing braces properly match.
+
+<p>
+
+<b>The class <tt>CheckBraces</tt>.</b>
+Your Java application should be defined in a class named 
+<tt>CheckBraces</tt> and must run via the following command:
+
+<blockquote>
+<pre>
+java CheckBraces filename
+</pre>
+</blockquote>
+
+Here, the argument <tt>filename</tt> specifies the name of a Java source file 
+to be processed.  The class <tt>CheckBraces</tt> is partially completed.  In 
+particular, this program already has a code segment to read a text file given 
+in the command line into a string named <tt>inString</tt>.  It also has a code 
+segment to echo print <tt>inString</tt>.  You are to analyze the text within 
+the string <tt>inString</tt>.  Your program should terminate upon finding an 
+error, either an unmatched or missing brace, and indicate where the error is 
+by a character number (for example, character 7 means the seventh character 
+from the beginning).
+
+<p>
+<b>Testing correctness.</b>
+To check your correctness, run your program on the files 
+
+<blockquote>
+<a href="ValidClass.java"><tt>ValidClass.java</tt></a><br>
+<a href="UnmatchedBrace.java"><tt>UnmatchedBrace.java</tt></a><br>
+<a href="MissingBrace.java"><tt>MissingBrace.java</tt></a>
+</blockquote>
+
+(which may be downloaded by clicking these links from this Laboratory 5 
+webpage).  Save a snapshot of each test run in a text file named 
+<tt>lab5.out</tt>.  For <tt>UnmatchedBrace.java</tt>, it should behave in the 
+following way:
+
+<blockquote>
+<pre>
+miyazaki@lab:~/cpsc215/lab5$ java CheckBraces UnmatchedBrace.java 
+/**
+ * This class has an unmatched brace.
+ */
+
+public class UnmatchedBrace {
+  int arr[] = new int[25];
+  public UnmatchedBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k} = 10;
+  }
+}
+
+Unmatched brace at character 223: Found } expecting ].
+</pre>
+</blockquote>
+
+For <tt>MissingBrace.java</tt>, it should behave in the following way:
+
+<blockquote>
+<pre>
+miyazaki@lab:~/cpsc215/lab5$ java CheckBraces MissingBrace.java 
+/**
+ * This class has a missing brace.
+ */
+
+public class MissingBrace }
+  int arr[] = new int[25];
+  public MissingBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+
+Unmatched brace at character 70: No opening brace for }.
+</pre>
+</blockquote>
+
+<h3>
+3. Documentation with Javadoc
+</h3>
+
+As done before, document your code using Javadoc tags.  For more details about 
+Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+4. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>CheckBraces.java</tt> and 
+<tt>lab5.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

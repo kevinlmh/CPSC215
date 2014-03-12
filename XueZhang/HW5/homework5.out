@@ -1,0 +1,70 @@
+> run Tester
+This list is empty.
+Adding element BOS to last...
+The size of set A = 1
+BOS; The first element is BOS, and the last one is BOS. 
+Adding element JFK to first...
+Adding element BDL to last...
+The first element in A = JFK
+The last element in A = BDL
+The current size is 3
+The current size is 5
+The first element is PRE, and the last one is BDL. 
+Removing the first element...
+The element removed is:  PRE
+Removing the last element:  BDL
+The first element is CYS, and the last one is BOS. 
+A; B; C; D; E; F; G; H; I; J; K; L; M; N; O; P; Q; R; S; T; U; V; W; X; Y; Z; The first element is A, and the last one is Z. 
+The last element of set B = Z
+The first element of set B = A
+> 
+
+ycai2@syslab11:/home3/ycai2/cpsc215/HW5$ javac CheckBraces.java
+ycai2@syslab11:/home3/ycai2/cpsc215/HW5$ java CheckBraces UnmatchedBrace.java
+/**
+ * This class has an unmatched brace.
+ */
+
+public class UnmatchedBrace {
+  int arr[] = new int[25];
+  public UnmatchedBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k} = 10;
+  }
+}
+Unmatched brace at character 223: Found } expecting ].
+ycai2@syslab11:/home3/ycai2/cpsc215/HW5$ java CheckBraces MissingBrace.java
+/**
+ * This class has a missing brace.
+ */
+
+public class MissingBrace }
+  int arr[] = new int[25];
+  public MissingBrace() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+Unmatched brace at character 70: No opening brace for }.
+ycai2@syslab11:/home3/ycai2/cpsc215/HW5$ java CheckBraces ValidClass.java
+/**
+ * This is a valid class.
+ */
+
+public class ValidClass {
+  int arr[] = new int[25];
+  public ValidClass() {
+    init();
+  }
+  public void init() {
+    for (int k = 0; k < arr.length; k++)
+      arr[k] = 10;
+  }
+}
+

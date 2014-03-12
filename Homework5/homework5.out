@@ -1,0 +1,46 @@
+mliu2@syslab05:/home3/mliu2/Documents/CPSC-215/Homework5$ java Tester
+Adding 'BOS' to the front of Deque A ...
+The Deque A = { BOS }
+Adding 'JFK' to the rear of Deque A ...
+The Deque A = { BOS, JFK }
+Add 'BDL' to the front of Deque A ...
+The Deque A = { BDL, BOS, JFK }
+A now has 3 elements
+The first element of Deque A is: BDL
+The last element of Deque A is: JFK
+Removing the first element of Deque A ...
+The Deque A = { BOS, JFK }
+Removing the last element of Deque A ...
+The Deque A = { BOS }
+A now has 1 element
+Deque A is empty = false
+Removing the First element of Deque A ...
+The Deque A = {  }
+Deque A is empty = true
+
+mliu2@syslab05:/home3/mliu2/Documents/CPSC-215/Homework5$ java Josephus
+  Queue: DequeQueue@2b820dda  k = 3
+    Doug is out
+  Queue: DequeQueue@2b820dda  k = 3
+    Bob is out
+  Queue: DequeQueue@2b820dda  k = 3
+    Alice is out
+  Queue: DequeQueue@2b820dda  k = 3
+    Cindy is out
+  Queue: DequeQueue@2b820dda  k = 3
+    Fred is out
+First winner is Ed
+  Queue: DequeQueue@675b7986  k = 10
+    Kim is out
+  Queue: DequeQueue@675b7986  k = 10
+    Lance is out
+  Queue: DequeQueue@675b7986  k = 10
+    Irene is out
+  Queue: DequeQueue@675b7986  k = 10
+    Gene is out
+  Queue: DequeQueue@675b7986  k = 10
+    Hope is out
+Second winner is Jack
+  Queue: DequeQueue@2687816d  k = 7
+    Roberto is out
+Third winner is Mike

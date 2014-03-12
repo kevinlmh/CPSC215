@@ -6,6 +6,8 @@
  *
  * @author Roberto Tamassia
  * @author Michael Goodrich
+ * @author Rahul Chandrashekhar
+ * @author Kevin Liu
  * @see BinaryTree
  * @see BoundaryViolationException
  * @see BTPosition
@@ -30,27 +32,37 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
     size = 0;
   }
 
-  /** Returns the number of nodes in the tree. */
+  /** Returns the number of nodes in the tree.
+   * @return the size of the tree
+   */
   public int size() {
     return size; 
   }
 
-  /** Returns whether the tree is empty. */
+  /** Returns whether the tree is empty.
+   * @return boolean true or false on the basis of whether
+   * the tree is empty or not
+   */
   public boolean isEmpty() {
     return (size == 0);
   }
 
-  /** Returns whether a node is internal. */
+  /** Returns whether a node is internal.
+   * @return boolean true or false on the basis of whether
+   * the node is internal or not
+   */
   public boolean isInternal(Position<E> v) throws InvalidPositionException {
     checkPosition(v);           // auxiliary method
     return (hasLeft(v) || hasRight(v));
   }
 
-  /** Returns whether a node is external. */
+  /** Returns whether a node is external.
+   * @return boolean true or false on the basis of whether
+   * the node is external or not
+   */
   public boolean isExternal(Position<E> v) throws InvalidPositionException {
-
-    // Complete this blank.
-
+    checkPosition(v);           // auxiliary method
+    return !(hasLeft(v) || hasRight(v));
   }
 
   /** Returns whether a node is the root. */
@@ -65,11 +77,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
     return (vv.getLeft() != null);
   }
 
-  /** Returns whether a node has a right child. */
+  /** Returns whether a node has a right child.
+   * @return boolean true or false on the basis of whether
+   * the node has a right subtree or not
+   */
   public boolean hasRight(Position<E> v) throws InvalidPositionException { 
-
-    // Complete this blank.
-
+    BTPosition<E> vv = checkPosition(v);
+    return (vv.getRight() != null);
   }
 
   /** Returns the root of the tree. */
@@ -89,11 +103,17 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
     return leftPos;
   }
 
-  /** Returns the right child of a node. */
+  /** Returns the right child of a node.
+   * @param v the node whose right child has to be returned
+   * @return right child of the given node
+   */
   public Position<E> right(Position<E> v) 
     throws InvalidPositionException, BoundaryViolationException {
-
-    // Complete this blank.
+    BTPosition<E> vv = checkPosition(v);
+    Position<E> rightPos = vv.getRight();
+    if (rightPos == null)
+      throw new BoundaryViolationException("No right child");
+    return rightPos;
 
   }  
 
@@ -187,12 +207,21 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
     return ww;
   }
 
-  /** Inserts a right child at a given node. */
+  /** Inserts a right child at a given node.
+   * @param v the position at which a right child has to be inserted
+   * @param e the element which has to be inserted
+   * @return the node after insertion
+   */
   public Position<E> insertRight(Position<E> v, E e)
     throws InvalidPositionException {
-
-    // Complete this blank.
-
+		BTPosition<E> vv = checkPosition(v);
+    Position<E> rightPos = vv.getRight();
+    if (rightPos != null)
+      throw new InvalidPositionException("Node already has a right child");
+    BTPosition<E> ww = createNode(e, vv, null, null);
+    vv.setRight(ww);
+    size++;
+    return ww;
   }
 
   /** Removes a node with zero or one child. */
@@ -213,17 +242,17 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
       ww = null;
     if (vv == root) { 	        // v is the root
       if (ww != null)
-	ww.setParent(null);
+				ww.setParent(null);
       root = ww;
     }
     else { 		        // v is not the root
       BTPosition<E> uu = vv.getParent();
       if (vv == uu.getLeft())
-	uu.setLeft(ww);
+				uu.setLeft(ww);
       else
-	uu.setRight(ww);
+				uu.setRight(ww);
       if(ww != null)
-	ww.setParent(uu);
+				ww.setParent(uu);
     }
     size--;
     return v.element();

@@ -5,6 +5,7 @@
  * when the size of the sequence exceeds the capacity of the array.
  *
  * @author Kevin Liu
+ * @see Sequence
  * @see IndexOutOfBoundsException
  */
 

@@ -50,7 +50,7 @@ public class MyTextEditor {
    * Sets the cursor to be the text line after its current position.
    */
   public void cursorDown() throws BoundaryViolationException {
-		text.checkIndex(cursor+1);
+		text.checkBoundary(cursor+1, text.size());
 		cursor = text.indexOf(text.next(text.atIndex(cursor)));
 	}
 
@@ -58,7 +58,7 @@ public class MyTextEditor {
    * Sets the cursor to be the text line before its current position.
    */
   public void cursorUp() throws BoundaryViolationException {
-		text.checkIndex(cursor-1);
+		text.checkBoundary(cursor-1, size());
 		cursor = text.indexOf(text.prev(text.atIndex(cursor)));
 	}
 

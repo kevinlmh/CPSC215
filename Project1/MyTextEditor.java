@@ -1,7 +1,7 @@
 /**
  * File: MyTextEditor.java
  *
- * This is a simple text editor built for lines of text.  \
+ * This is a simple text editor built for lines of text.  
  * Each line of text is to be viewed as a 
  * separate string.  In addition, this editor has a cursor associated 
  * with some line in the text.  Initially, the cursor is set to the the 
@@ -66,7 +66,8 @@ public class MyTextEditor {
    * Sets the cursor to be the line ranked i (the first line is line 0).
    */
   public void moveCursorToLine(int i) throws BoundaryViolationException {
-		text.checkIndex(i);
+		text.checkBoundary(i, text.size());
 		cursor = i;
 	}
 
+}

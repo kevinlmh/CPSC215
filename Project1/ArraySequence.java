@@ -39,10 +39,10 @@ public class ArraySequence<E> implements Sequence<E> {
   }
 
 	/** Checks whether the position p is in the valid range */
-	public void checkPosition(PositionObject<E> p, int n) 
+	public void checkPosition(Position<E> p, int n) 
 		throws InvalidPositionException {
-		if (p.index() < 0 || p.index() >= n)
-			throw new InvalidPositonException("Invalid Positon!");
+		if (((PositionObject<E>)p).index() < 0 || ((PositionObject<E>)p).index() >= n)
+			throw new InvalidPositionException("Invalid Positon!");
 	}
 		
   /** Inserts an element at the given index. */
@@ -88,16 +88,16 @@ public class ArraySequence<E> implements Sequence<E> {
 	// Sequence methods
 
 	/** Returns the position containing the element at the given index. */
-  public PositionObject<E> atIndex(int r) throws BoundaryViolationException {
+  public Position<E> atIndex(int r) throws BoundaryViolationException {
 		if (r < 0 || r >= size())
 			throw new BoundaryViolationException("Boundary Violation!");	
 		return (PositionObject<E>)A[r];	
 	}
 
   /** Returns the index of the element stored at the given position. */
-  public int indexOf(PositionObject<E> p) throws InvalidPositionException {
+  public int indexOf(Position<E> p) throws InvalidPositionException {
 		checkPosition(p, size());
-		return p.index();
+		return ((PositionObject<E>)p).index();
 	}
 
 	// Deque methods
@@ -130,67 +130,68 @@ public class ArraySequence<E> implements Sequence<E> {
   public E removeFirst() throws EmptyDequeException {
 		if (isEmpty())
 			throw new EmptyDequeException("Sequence is empty");
-		remove(0);		
+		return remove(0);		
 	}
 
   /** Removes the last element; an exception is thrown if deque is empty. */
   public E removeLast() throws EmptyDequeException {
 		if (isEmpty())
 			throw new EmptyDequeException("Sequence is empty");
-		remove(size()-1);
+		return remove(size()-1);
 	}
 	
 	// ArrayPositionList methods 
 	/** Returns the first node in the list. */
-  public PositionObject<E> first() {
+  public Position<E> first() {
 		return A[0];
 	}
 
   /** Returns the last node in the list. */
-  public PositionObject<E> last() {
+  public Position<E> last() {
 		return A[size()-1];
 	}
 
   /** Returns the position object after a given position object in the list. */
-  public PositionObejct<E> next(PositionObject<E> p) 
+  public Position<E> next(Position<E> p) 
     throws InvalidPositionException, BoundaryViolationException {
 		checkPosition(p, size());
-		if (p.index() + 1 < 0 || p.index() + 1 >= size())
+		if (((PositionObject<E>)p).index() + 1 < 0 || ((PositionObject<E>)p).index() + 1 >= size())
 			throw new BoundaryViolationException("Boundary Violation!");
-		return (PositionObject<E>)A[p.index() + 1];
+		return (PositionObject<E>)A[((PositionObject<E>)p).index() + 1];
 	}
 
   /** Returns the position object before a given position object in the list. */
-  public PositionObject<E> prev(PositionObject<E> p) 
+  public Position<E> prev(Position<E> p) 
     throws InvalidPositionException, BoundaryViolationException {
 		checkPosition(p, size());
-		if (p.index() - 1 < 0 || p.index() - 1 >= size())
+		if (((PositionObject<E>)p).index() - 1 < 0 || ((PositionObject<E>)p).index() - 1 >= size())
 			throw new BoundaryViolationException("Boundary Violation!");
-		return A[p.index()-1];
+		return A[((PositionObject<E>)p).index()-1];
 	}
 
   /** Inserts an element after the given node in the list. */
-  public void addAfter(PositionObject<E> p, E e) throws InvalidPositionException {
+  public void addAfter(Position<E> p, E e) throws InvalidPositionException {
 		checkPosition(p, size());
-		add(p.index() + 1, e);
+		add(((PositionObject<E>)p).index() + 1, e);
 	}
 
   /** Inserts an element before the given element in the sequence. */
-  public void addBefore(PositionObject<E> p, E e) throws InvalidPositionException {
+  public void addBefore(Position<E> p, E e) throws InvalidPositionException {
 		checkPosition(p, size());
-		add(p.index() - 1, e);
+		add(((PositionObject<E>)p).index() - 1, e);
 	}
 
   /** Removes a node from the list, returning the element stored there. */
-  public E remove(PositionObject<E> p) throws InvalidPositionException {
+  public E remove(Position<E> p) throws InvalidPositionException {
 		checkPosition(p, size());
-	  return remove(p.index());
+	  return remove(((PositionObject<E>)p).index());
 	}
 
   /** Replaces the element stored at the given node, returning old element. */
-  public E set(PositionObject<E> p, E e) throws InvalidPositionException {
+  public E set(Position<E> p, E e) throws InvalidPositionException {
 		checkPosition(p, size());
-		set(p.index(), e);
+		E temp = set(((PositionObject<E>)p).index(), e);
+		return temp;
 	}
 
 }

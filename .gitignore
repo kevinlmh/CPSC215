@@ -4,4 +4,7 @@
 *.jar
 *.war
 *.ear
+# files ending in ~
 *~
+# .swp files
+*.swp

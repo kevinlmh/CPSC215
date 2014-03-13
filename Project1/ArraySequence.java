@@ -44,7 +44,19 @@ public class ArraySequence<E> implements Sequence<E> {
 		if (((PositionObject<E>)p).index() < 0 || ((PositionObject<E>)p).index() >= n)
 			throw new InvalidPositionException("Invalid Positon!");
 	}
-		
+
+	/** Checks whether the index r is out of bound */	
+	public void checkBoundary(int r, int n) throws BoundaryViolationException {
+		if (r < 0 || r >= n)
+			throw new BoundaryViolationException("Boundary Violation!");
+	}
+
+	/** Checks wheter the sequence is empty */
+	public void checkEmpty() throws EmptyDequeException {
+		if (isEmpty())
+			throw new EmptyDequeException("Sequence is empty!");
+	}
+
   /** Inserts an element at the given index. */
   public void add(int r, E e) throws IndexOutOfBoundsException {
     checkIndex(r, size() + 1);
@@ -89,8 +101,7 @@ public class ArraySequence<E> implements Sequence<E> {
 
 	/** Returns the position containing the element at the given index. */
   public Position<E> atIndex(int r) throws BoundaryViolationException {
-		if (r < 0 || r >= size())
-			throw new BoundaryViolationException("Boundary Violation!");	
+		checkBoundary(r, size());
 		return (PositionObject<E>)A[r];	
 	}
 
@@ -104,15 +115,13 @@ public class ArraySequence<E> implements Sequence<E> {
 
 	/** Returns the first element; an exception is thrown if deque is empty. */
   public E getFirst() throws EmptyDequeException {
-		if (isEmpty())
-			throw new EmptyDequeException("Sequence is empty!");
+		checkEmpty();
 		return get(0); 
 	}
 
   /** Returns the last element; an exception is thrown if deque is empty. */
   public E getLast() throws EmptyDequeException {
-		if (isEmpty())
-			throw new EmptyDequeException("Sequence is empty");
+		checkEmpty();
 		return get(size()-1);
 	}
 
@@ -128,15 +137,13 @@ public class ArraySequence<E> implements Sequence<E> {
 
   /** Removes the first element; an exception is thrown if deque is empty. */
   public E removeFirst() throws EmptyDequeException {
-		if (isEmpty())
-			throw new EmptyDequeException("Sequence is empty");
+		checkEmpty();
 		return remove(0);		
 	}
 
   /** Removes the last element; an exception is thrown if deque is empty. */
   public E removeLast() throws EmptyDequeException {
-		if (isEmpty())
-			throw new EmptyDequeException("Sequence is empty");
+		checkEmpty();
 		return remove(size()-1);
 	}
 	
@@ -155,8 +162,7 @@ public class ArraySequence<E> implements Sequence<E> {
   public Position<E> next(Position<E> p) 
     throws InvalidPositionException, BoundaryViolationException {
 		checkPosition(p, size());
-		if (((PositionObject<E>)p).index() + 1 < 0 || ((PositionObject<E>)p).index() + 1 >= size())
-			throw new BoundaryViolationException("Boundary Violation!");
+		checkBoundary(((PositionObject<E>)p).index() + 1, size());
 		return (PositionObject<E>)A[((PositionObject<E>)p).index() + 1];
 	}
 
@@ -164,8 +170,7 @@ public class ArraySequence<E> implements Sequence<E> {
   public Position<E> prev(Position<E> p) 
     throws InvalidPositionException, BoundaryViolationException {
 		checkPosition(p, size());
-		if (((PositionObject<E>)p).index() - 1 < 0 || ((PositionObject<E>)p).index() - 1 >= size())
-			throw new BoundaryViolationException("Boundary Violation!");
+		checkBoundary(((PositionObject<E>)p).index() -1, size());
 		return A[((PositionObject<E>)p).index()-1];
 	}
 

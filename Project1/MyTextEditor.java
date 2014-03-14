@@ -70,5 +70,10 @@ public class MyTextEditor {
 		text.checkBoundary(i, text.size());
 		cursor = i;
 	}
-
+	
+	/** Prints the current line */
+	public void printCurrentLine() throws BoundaryViolationException {
+		text.checkBoundary(cursor, text.size());
+		System.out.println(text.get(cursor));
+	}
 }

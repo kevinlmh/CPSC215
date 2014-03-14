@@ -21,9 +21,17 @@ public class ArraySequence<E> implements Sequence<E> {
 
   /** Creates the indexed array with initial capacity 16. */
   public ArraySequence() { 
-    A = (PositionObject<E>[]) new PositionObject[capacity]; // initialize the array of Positon Objects 
-  }
+  	this(capacity);
+	}
 	
+	/**
+	 * Creates the index array with custom capacity.
+	 */
+	public ArraySequence(int cap) {
+		A = (PositionObject<E>[]) new PositionObject[cap];
+		capacity = cap;				
+	}
+
 	// Sequence methods
 
 	/** 
@@ -111,15 +119,17 @@ public class ArraySequence<E> implements Sequence<E> {
    */
   public void add(int r, E e) throws IndexOutOfBoundsException {
     checkIndex(r, size() + 1);
-    if (size == capacity) {        // an overflow
+		if (size == capacity) {        // an overflow
       capacity *= 2;
       PositionObject<E>[] B =(PositionObject<E>[]) new PositionObject[capacity];
       for (int i=0; i<size; i++) 
 				B[i] = A[i];
       A = B;
     }
-    for (int i=size-1; i>=r; i--)  // shift elements up
+		for (int i=size-1; i>=r; i--) {  // shift elements up
       A[i+1] = A[i];
+			A[i+1].setIndex(i+1);
+		}
 		A[r] = new PositionObject<E>(e,r);
     size++;
   }
@@ -142,8 +152,10 @@ public class ArraySequence<E> implements Sequence<E> {
   public E remove(int r) throws IndexOutOfBoundsException {
     checkIndex(r, size());
     E temp = A[r].element();
-    for (int i=r; i<size-1; i++)   // shift elements down
+    for (int i=r; i<size-1; i++) {  // shift elements down
       A[i] = A[i+1];
+			A[i].setIndex(i);
+		}
     size--;
     return temp;
   }

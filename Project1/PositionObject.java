@@ -26,5 +26,13 @@ public class PositionObject<E> implements Position<E> {
 	public int index() {
 		return index;
 	}
+	
+	public void setElement(E e) {
+		element = e;
+	}
+
+	public void setIndex(int i) {
+		index = i;
+	}
 
 }

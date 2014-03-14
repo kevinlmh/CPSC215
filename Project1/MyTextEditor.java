@@ -53,7 +53,7 @@ public class MyTextEditor {
    * Sets the cursor to be the text line after its current position.
    */
   public void cursorDown() throws BoundaryViolationException {
-		text.checkBoundary(cursor+1, text.size());
+		text.checkBoundary(cursor+1, size());
 		cursor = text.indexOf(text.next(text.atIndex(cursor)));
 	}
 
@@ -69,7 +69,7 @@ public class MyTextEditor {
    * Sets the cursor to be the line ranked i (the first line is line 0).
    */
   public void moveCursorToLine(int i) throws BoundaryViolationException {
-		text.checkBoundary(i, text.size());
+		text.checkBoundary(i, size());
 		cursor = i;
 	}
 
@@ -77,7 +77,7 @@ public class MyTextEditor {
 	 * Modifies the current line.
 	 */
 	public String modifyCurrentLine(String s) throws BoundaryViolationException {
-		text.checkBoundary(cursor, text.size());
+		text.checkBoundary(cursor, size());
 		String temp = text.get(cursor);
 		text.set(cursor, s);
 		return temp;				
@@ -86,21 +86,29 @@ public class MyTextEditor {
 	/**
 	 * Deletes the current line.
 	 */
-	 public String deleteCurrentLine() throws BoundaryViolationException {
-	 }
+	public String deleteCurrentLine() throws BoundaryViolationException {
+		text.checkBoundary(cursor, size());
+		String temp = text.remove(cursor);
+		cursor--;
+		return temp;
+	}
 
 	 /**
 	  * Inserts a new line after current line.
 		*/
 		public void insertAfterCursor(String s) throws BoundaryViolationException {
+			text.checkBoundary(cursor, size());
+			text.add(cursor+1, s);
 		}
 
 
 		/**
 		 * Inserts a new line before current line.
 		 */
-		 public void insertBeforeCursor(String s) throws BoundaryViolationException {
-		 }
+		public void insertBeforeCursor(String s) throws BoundaryViolationException {
+			text.checkBoundary(cursor, size());
+			text.add(cursor-1, s);	 
+		}
 
 
 

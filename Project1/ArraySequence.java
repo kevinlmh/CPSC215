@@ -16,20 +16,19 @@
 public class ArraySequence<E> implements Sequence<E> {
 
   private PositionObject<E>[] A;	// array storing the elements of the sequence
-  private int capacity = 16;  		// initial length of array A
+  private int capacity;  		// initial length of array A
   private int size = 0;       		// number of elements stored in the sequence
 
-  /** Creates the indexed array with initial capacity 16. */
-  public ArraySequence() { 
-  	this(capacity);
-	}
 	
-	/**
-	 * Creates the index array with custom capacity.
-	 */
+	/** Creates an array of PositionObejcts with custom capacity. */
 	public ArraySequence(int cap) {
 		A = (PositionObject<E>[]) new PositionObject[cap];
 		capacity = cap;				
+	}
+
+  /** Creates array of PositionObjects with default capacity 16. */
+  public ArraySequence() { 
+  	this(16);
 	}
 
 	// Sequence methods
@@ -210,7 +209,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Removes the first element; an exception is thrown if deque is empty. 
+   * Removes the first element; an exception is thrown if sequence is empty. 
    * @return the element removed i.e. the first element
    */
   public E removeFirst() throws EmptyDequeException {
@@ -219,7 +218,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Removes the last element; an exception is thrown if deque is empty. 
+   * Removes the last element; an exception is thrown if sequence is empty. 
    * @return the element removed i.e. the last element
    */
   public E removeLast() throws EmptyDequeException {
@@ -230,7 +229,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	// ArrayPositionList methods 
 	
 	/** 
-	 * Returns the first node in the list. 
+	 * Returns the position of the first element in the sequence. 
 	 * @return the Position of the first element
 	 */
   public Position<E> first() {
@@ -238,7 +237,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Returns the last node in the list. 
+   * Returns the position of the last element in the sequence. 
    * @return the Position of the last element
    */
   public Position<E> last() {
@@ -246,7 +245,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Returns the position object after a given position object in the list. 
+   * Returns the position object after a given position object in the sequence.
    * @param p a Position
    * @return the next Position
    */
@@ -258,7 +257,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Returns the position object before a given position object in the list. 
+   * Returns the position object before a given position object in the sequence. 
    * @param p a Position
    * @return the previous Position
    */
@@ -270,7 +269,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Inserts an element after the given node in the list. 
+   * Inserts an element after the given position in the sequence. 
    * @param p the Position you want to insert after
    * @param e the element you want to insert after p
    */
@@ -280,7 +279,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Inserts an element before the given element in the sequence. 
+   * Inserts an element before the given position in the sequence. 
    * @param p the Position you want to insert before
    * @param e the element you want to insert before p
    */
@@ -290,7 +289,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Removes a node from the list, returning the element stored there. 
+   * Removes an element from the sequence and returns the element removed. 
    * @param p the Position of the element you want to remove
    * @return the element removed
    */
@@ -300,7 +299,7 @@ public class ArraySequence<E> implements Sequence<E> {
 	}
 
   /** 
-   * Replaces the element stored at the given node, returning old element. 
+   * Replaces the element stored at the given position and returns old element. 
    * @param p the Position you want to set
    * @param e the new element
    * @return the old element

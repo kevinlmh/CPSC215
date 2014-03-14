@@ -4,9 +4,9 @@
  * This is a simple text editor built for lines of text.  
  * Each line of text is to be viewed as a 
  * separate string.  In addition, this editor has a cursor associated 
- * with some line in the text.  Initially, the cursor is set to the the 
+ * with some line in the text.  Initially, the cursor is set to the the
  * line -1 just before the first line in the text.  The methods of the 
- * text editor are designed to update and print the text file using the 
+ * text editor are designed to update and print the text file using the
  * cursor.
  *
  * @author Kevin Liu 
@@ -16,11 +16,12 @@
  */
 
 public class MyTextEditor {
+	
 	private ArraySequence<String> text;
 	private int cursor;
 
-	public MyTextEditor() {
-		text = new ArraySequence<String>();
+	public MyTextEditor(ArraySequence<String> text) {
+		this.text = text;
 		cursor = -1;
 	}
 	

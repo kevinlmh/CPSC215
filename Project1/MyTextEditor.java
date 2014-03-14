@@ -22,7 +22,9 @@ public class MyTextEditor {
 
 	public MyTextEditor(ArraySequence<String> text) {
 		this.text = text;
-		cursor = -1;
+		//if (!text.isEmpty())
+			//cursor = 0;
+		cursor = -1;	
 	}
 	
   /** 
@@ -70,7 +72,39 @@ public class MyTextEditor {
 		text.checkBoundary(i, text.size());
 		cursor = i;
 	}
-	
+
+	/**
+	 * Modifies the current line.
+	 */
+	public String modifyCurrentLine(String s) throws BoundaryViolationException {
+		text.checkBoundary(cursor, text.size());
+		String temp = text.get(cursor);
+		text.set(cursor, s);
+		return temp;				
+	}
+
+	/**
+	 * Deletes the current line.
+	 */
+	 public String deleteCurrentLine() throws BoundaryViolationException {
+	 }
+
+	 /**
+	  * Inserts a new line after current line.
+		*/
+		public void insertAfterCursor(String s) throws BoundaryViolationException {
+		}
+
+
+		/**
+		 * Inserts a new line before current line.
+		 */
+		 public void insertBeforeCursor(String s) throws BoundaryViolationException {
+		 }
+
+
+
+
 	/** Prints the current line */
 	public void printCurrentLine() throws BoundaryViolationException {
 		text.checkBoundary(cursor, text.size());

@@ -76,4 +76,12 @@ public class MyTextEditor {
 		text.checkBoundary(cursor, text.size());
 		System.out.println(text.get(cursor));
 	}
+
+	/** prints the text */
+	public void printText() {
+		for (int i=0; i<size(); i++) {
+			cursorDown();
+			printCurrentLine();
+		}
+	}
 }

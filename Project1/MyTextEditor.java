@@ -54,7 +54,8 @@ public class MyTextEditor {
    */
   public void cursorDown() throws BoundaryViolationException {
 		text.checkBoundary(cursor+1, size());
-		cursor = text.indexOf(text.next(text.atIndex(cursor)));
+		//cursor = text.indexOf(text.next(text.atIndex(cursor)));
+		cursor = cursor + 1;
 	}
 
   /** 
@@ -62,7 +63,8 @@ public class MyTextEditor {
    */
   public void cursorUp() throws BoundaryViolationException {
 		text.checkBoundary(cursor-1, size());
-		cursor = text.indexOf(text.prev(text.atIndex(cursor)));
+		//cursor = text.indexOf(text.prev(text.atIndex(cursor)));
+		cursor = cursor - 1;
 	}
 
   /** 
@@ -121,6 +123,7 @@ public class MyTextEditor {
 
 	/** prints the text */
 	public void printText() {
+		cursor = -1;
 		for (int i=0; i<size(); i++) {
 			cursorDown();
 			printCurrentLine();

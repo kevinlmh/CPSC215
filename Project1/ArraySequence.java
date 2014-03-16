@@ -75,7 +75,7 @@ public class ArraySequence<E> implements Sequence<E> {
    * Checks whether the index r is in the range between 0 and n - 1. 
    * @param r the index you want to check
    * @param the upper bound of the range
-   * @return true if 0 < r <n, false otherwise
+   * @return true if 0 < r < n, false otherwise
    */
   public void checkIndex(int r, int n) throws IndexOutOfBoundsException {
     if ((r < 0) || (r >= n))

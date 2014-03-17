@@ -17,13 +17,11 @@
 
 public class MyTextEditor {
 	
-	private ArraySequence<String> text;
+	private ArraySequence<String> text = new ArraySequence<String>();
 	private int cursor;
 
-	public MyTextEditor(ArraySequence<String> text) {
+	public MyTextEditor() {
 		this.text = text;
-		//if (!text.isEmpty())
-			//cursor = 0;
 		cursor = -1;	
 	}
 	
@@ -46,25 +44,32 @@ public class MyTextEditor {
    * is empty.
    */
   public boolean isCursorAtLastLine() {
-		return cursor == text.indexOf(text.last());	
+		return cursor == text.indexOf(text.last()) || isEmpty();
+	}
+
+	// mine 
+	/**
+	 * Returns true if the cursor is at the first line in the text or the text 
+	 * is empty
+	 */
+	public boolean isCursorAtFirstLine() {
+		return cursor == text.indexOf(text.first()) || isEmpty();
 	}
 
   /** 
    * Sets the cursor to be the text line after its current position.
    */
   public void cursorDown() throws BoundaryViolationException {
-		text.checkBoundary(cursor+1, size());
-		//cursor = text.indexOf(text.next(text.atIndex(cursor)));
-		cursor = cursor + 1;
+		text.checkBoundary(cursor + 1, size());
+		cursor++;
 	}
 
   /** 
    * Sets the cursor to be the text line before its current position.
    */
   public void cursorUp() throws BoundaryViolationException {
-		text.checkBoundary(cursor-1, size());
-		//cursor = text.indexOf(text.prev(text.atIndex(cursor)));
-		cursor = cursor - 1;
+		text.checkBoundary(cursor - 1, size());
+		cursor--;
 	}
 
   /** 
@@ -76,52 +81,51 @@ public class MyTextEditor {
 	}
 
 	/**
-	 * Modifies the current line.
+	 * Inserts a new line after current line.
 	 */
-	public String modifyCurrentLine(String s) throws BoundaryViolationException {
-		text.checkBoundary(cursor, size());
-		String temp = text.get(cursor);
-		text.set(cursor, s);
-		return temp;				
+	public void insertAfterCursor(String s) throws BoundaryViolationException {
+		if (cursor < -1 || cursor >= size())
+			throw new BoundaryViolationException("Boundary Violation!");
+		text.add(cursor+1, s);
+		cursor++;
 	}
 
 	/**
-	 * Deletes the current line.
+	 * Inserts a new line before current line.
 	 */
-	public String deleteCurrentLine() throws BoundaryViolationException {
+	public void insertBeforeCursor(String s) throws BoundaryViolationException {
+		if (cursor < 0 || cursor >= size())
+			throw new BoundaryViolationException("Boundary Violation!");	
+		text.add(cursor, s);
+	}
+	
+	/**
+   * Replaces the string at the current cursor with the String s, keeping
+   * the cursor at this line.
+   */
+  public void replaceAtCursor(String s) throws BoundaryViolationException {
 		text.checkBoundary(cursor, size());
-		String temp = text.remove(cursor);
-		cursor--;
-		return temp;
+		text.set(cursor, s);
 	}
 
-	 /**
-	  * Inserts a new line after current line.
-		*/
-		public void insertAfterCursor(String s) throws BoundaryViolationException {
-			text.checkBoundary(cursor, size());
-			text.add(cursor+1, s);
-		}
+  /**
+   * Removes the entire line at the current cursor, setting the cursor to now
+   * be the position of the next line, unless the cursor was the last line, 
+   * in which case the cursor should move to the new last line.
+   */
+  public void removeAtCursor() throws BoundaryViolationException {
+		text.checkBoundary(cursor, size());
+		text.remove(cursor);
+		cursor--;
+	}
 
-
-		/**
-		 * Inserts a new line before current line.
-		 */
-		public void insertBeforeCursor(String s) throws BoundaryViolationException {
-			text.checkBoundary(cursor, size());
-			text.add(cursor-1, s);	 
-		}
-
-
-
-
-	/** Prints the current line */
+	/** Prints current line */	
 	public void printCurrentLine() throws BoundaryViolationException {
 		text.checkBoundary(cursor, text.size());
 		System.out.println(text.get(cursor));
 	}
 
-	/** prints the text */
+	/** Prints the text */
 	public void printText() {
 		cursor = -1;
 		for (int i=0; i<size(); i++) {

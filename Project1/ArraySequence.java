@@ -120,7 +120,7 @@ public class ArraySequence<E> implements Sequence<E> {
     checkIndex(r, size() + 1);
 		if (size == capacity) {        // an overflow
       capacity *= 2;
-      PositionObject<E>[] B =(PositionObject<E>[]) new PositionObject[capacity];
+      PositionObject<E>[] B = (PositionObject<E>[]) new PositionObject[capacity];
       for (int i=0; i<size; i++) 
 				B[i] = A[i];
       A = B;

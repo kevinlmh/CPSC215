@@ -2,8 +2,8 @@
  * File: MyTextEditor.java
  *
  * This is a simple text editor built for lines of text.  
- * Each line of text is to be viewed as a 
- * separate string.  In addition, this editor has a cursor associated 
+ * Each line of text is to be viewed as a separate string.  
+ * In addition, this editor has a cursor associated 
  * with some line in the text.  Initially, the cursor is set to the the
  * line -1 just before the first line in the text.  The methods of the 
  * text editor are designed to update and print the text file using the
@@ -13,6 +13,7 @@
  * @version 1.0, 03/12/2014
  * @see BoundaryViolationException
  * @see String
+ * @see ArraySequence
  */
 
 public class MyTextEditor {
@@ -27,14 +28,16 @@ public class MyTextEditor {
 	
   /** 
    * Returns true if the text is completely empty (and cursor is at line -1).
+	 * @return ture if the text is empty and cursor = -1, false other wise
    */
   public boolean isEmpty() {
-		return text.isEmpty();
+		return text.isEmpty() && (cursor == -1);
 	}
 
   /** 
    * Returns the current number of lines of text. 
-   */
+   * @return the size of the text
+	 */
   public int size() {
 		return text.size();
 	}
@@ -42,20 +45,12 @@ public class MyTextEditor {
   /** 
    * Returns true if the cursor is at the last line in the text or the text 
    * is empty.
+	 * @return true if the cursor is at the last line or the text is empty, false otherwise
    */
   public boolean isCursorAtLastLine() {
 		return cursor == text.indexOf(text.last()) || isEmpty();
 	}
-
-	// mine 
-	/**
-	 * Returns true if the cursor is at the first line in the text or the text 
-	 * is empty
-	 */
-	public boolean isCursorAtFirstLine() {
-		return cursor == text.indexOf(text.first()) || isEmpty();
-	}
-
+ 
   /** 
    * Sets the cursor to be the text line after its current position.
    */
@@ -74,7 +69,8 @@ public class MyTextEditor {
 
   /** 
    * Sets the cursor to be the line ranked i (the first line is line 0).
-   */
+   * @param i the line number to move the cursor to
+	 */
   public void moveCursorToLine(int i) throws BoundaryViolationException {
 		text.checkBoundary(i, size());
 		cursor = i;
@@ -82,6 +78,7 @@ public class MyTextEditor {
 
 	/**
 	 * Inserts a new line after current line.
+	 * @param s the string to be inserted 
 	 */
 	public void insertAfterCursor(String s) throws BoundaryViolationException {
 		if (cursor < -1 || cursor >= size())
@@ -92,6 +89,7 @@ public class MyTextEditor {
 
 	/**
 	 * Inserts a new line before current line.
+	 * @param s the string to be inserted
 	 */
 	public void insertBeforeCursor(String s) throws BoundaryViolationException {
 		if (cursor < 0 || cursor >= size())
@@ -102,6 +100,7 @@ public class MyTextEditor {
 	/**
    * Replaces the string at the current cursor with the String s, keeping
    * the cursor at this line.
+	 * @param s the new string
    */
   public void replaceAtCursor(String s) throws BoundaryViolationException {
 		text.checkBoundary(cursor, size());
@@ -119,18 +118,12 @@ public class MyTextEditor {
 		cursor--;
 	}
 
-	/** Prints current line */	
-	public void printCurrentLine() throws BoundaryViolationException {
-		text.checkBoundary(cursor, text.size());
-		System.out.println(text.get(cursor));
-	}
-
 	/** Prints the text */
 	public void printText() {
 		cursor = -1;
 		for (int i=0; i<size(); i++) {
 			cursorDown();
-			printCurrentLine();
+			System.out.println(text.get(cursor));
 		}
 	}
 }

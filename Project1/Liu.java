@@ -1,11 +1,17 @@
 /** This is a class that tests MyTextEditor
+ *
  * @author Kevin Liu
+ * @version 1.0 03/18/2014
+ * @see MyTextEditor
  */
 
 public class Liu {
 	
 	public static void main(String args[]) {
+		
+		// create a new text editor
 		MyTextEditor editor = new MyTextEditor();
+		
 		// initialize text
 		editor.insertAfterCursor("Narnia...where the woods are thick and cool, where Talking Beasts are called to");
 		editor.insertAfterCursor("life, the land beyond the wardrobe, the secret country known only to Peter,");	
@@ -64,6 +70,5 @@ public class Liu {
 		System.out.println("\n*Final:");
 		editor.printText();
 	}
-
 
 }

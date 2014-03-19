@@ -20,7 +20,7 @@ public class Liu {
 		editor.insertAfterCursor("where a prince is put under an evil spell.");
 		editor.insertAfterCursor("Narnia...where dwarfs are loyal and tough and strong-or are they?");
 		// print text
-		System.out.println("Initial:");
+		System.out.println("\n*Initial:");
 		editor.printText();	
 
 		// modify text to match with middle.txt
@@ -46,7 +46,22 @@ public class Liu {
 		editor.cursorUp();
 		editor.insertAfterCursor("");
 		// print text
-		System.out.println("\nMiddle:");
+		System.out.println("\n*Middle:");
+		editor.printText();
+
+		// modify text to match with final.txt
+		editor.moveCursorToLine(2);
+		editor.replaceAtCursor("Susan, Edmund, and Lucy.");
+		editor.cursorDown();
+		editor.insertBeforeCursor("");
+		editor.insertAfterCursor("Narnia... where horses talk and hermits like company,");
+		editor.moveCursorToLine(12);
+		editor.replaceAtCursor("Narnia... where owls are wise, where some of the giants like to");
+		editor.moveCursorToLine(16);
+		editor.removeAtCursor();
+		editor.insertAfterCursor("Narnia... where dwarfs are loyal and tough and strong---or are they really?");
+		// print text
+		System.out.println("\n*Final:");
 		editor.printText();
 	}
 

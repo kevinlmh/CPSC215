@@ -27,7 +27,7 @@ public class Liu {
 		editor.insertAfterCursor("Narnia...where dwarfs are loyal and tough and strong-or are they?");
 		// print text
 		System.out.println("\n*Initial:");
-		editor.printText();	
+		editor.print();	
 
 		// modify text to match with middle.txt
 		editor.moveCursorToLine(1);
@@ -53,7 +53,7 @@ public class Liu {
 		editor.insertAfterCursor("");
 		// print text
 		System.out.println("\n*Middle:");
-		editor.printText();
+		editor.print();
 
 		// modify text to match with final.txt
 		editor.moveCursorToLine(2);
@@ -68,7 +68,7 @@ public class Liu {
 		editor.insertAfterCursor("Narnia... where dwarfs are loyal and tough and strong---or are they really?");
 		// print text
 		System.out.println("\n*Final:");
-		editor.printText();
+		editor.print();
 	}
 
 }

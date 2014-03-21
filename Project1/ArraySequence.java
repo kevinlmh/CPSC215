@@ -5,7 +5,7 @@
  * when the size of the sequence exceeds the capacity of the array.
  *
  * @author Kevin Liu
- * @version 1.0 March-13-2014
+ * @version 1.0 03/13/2014
  * @see Sequence
  * @see IndexOutOfBoundsException
  * @see BoundaryViolationException
@@ -16,11 +16,14 @@
 public class ArraySequence<E> implements Sequence<E> {
 
   private PositionObject<E>[] A;	// array storing the elements of the sequence
-  private int capacity;  		// initial length of array A
+  private int capacity;  					// initial length of array A
   private int size = 0;       		// number of elements stored in the sequence
 
 	
-	/** Creates an array of PositionObejcts with custom capacity. */
+	/** 
+	 * Creates an array of PositionObejcts with custom capacity. 
+	 * @param cap the capacity
+	 */
 	public ArraySequence(int cap) {
 		A = (PositionObject<E>[]) new PositionObject[cap];
 		capacity = cap;				

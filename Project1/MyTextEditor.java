@@ -16,7 +16,7 @@
  * @see ArraySequence
  */
 
-public class MyTextEditor {
+public class MyTextEditor implements SimpleTextEditor {
 	
 	private ArraySequence<String> text = new ArraySequence<String>();
 	private int cursor;

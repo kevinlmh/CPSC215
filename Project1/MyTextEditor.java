@@ -76,6 +76,13 @@ public class MyTextEditor {
 		cursor = i;
 	}
 
+  /**
+   * Returns the line number (rank) of the current cursor line.
+   */
+  public int cursorLineNum() {
+		return cursor;
+	}
+
 	/**
 	 * Inserts a new line after current line.
 	 * @param s the string to be inserted 

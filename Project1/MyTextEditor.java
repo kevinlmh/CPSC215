@@ -78,6 +78,7 @@ public class MyTextEditor {
 
   /**
    * Returns the line number (rank) of the current cursor line.
+	 * @return the rank of the current cursor line
    */
   public int cursorLineNum() {
 		return cursor;

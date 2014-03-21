@@ -127,7 +127,7 @@ public class MyTextEditor {
 	}
 
 	/** Prints the text */
-	public void printText() {
+	public void print() {
 		cursor = -1;
 		for (int i=0; i<size(); i++) {
 			cursorDown();

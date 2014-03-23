@@ -17,7 +17,7 @@ public class ArraySequence<E> implements Sequence<E> {
 
   private PositionObject<E>[] A;	// array storing the elements of the sequence
   private int capacity;  					// initial length of array A
-  private int size = 0;       		// number of elements stored in the sequence
+  private int size;   		    		// number of elements stored in the sequence
 
 	
 	/** 
@@ -26,7 +26,8 @@ public class ArraySequence<E> implements Sequence<E> {
 	 */
 	public ArraySequence(int cap) {
 		A = (PositionObject<E>[]) new PositionObject[cap];
-		capacity = cap;				
+		capacity = cap;
+		size = 0;				
 	}
 
   /** Creates array of PositionObjects with default capacity 16. */

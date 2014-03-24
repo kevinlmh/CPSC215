@@ -133,5 +133,9 @@ public class MyTextEditor implements SimpleTextEditor {
 			cursorDown();
 			System.out.println(text.get(cursor));
 		}
+		System.out.print("--- Is text empty: " + isEmpty());
+		System.out.print(" --- Text size: " + size());
+		System.out.print(" --- Cursor position: " + cursorLineNum());
+		System.out.println(" ---");
 	}
 }

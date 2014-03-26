@@ -1,0 +1,25 @@
+The first example.
+Elements in preorder: []
+Inserting * as the root.
+Elements in preorder: [*]
+Inserting 2 as the left child of *.
+Elements in preorder: [*, 2]
+Inserting + as the right child of *.
+Elements in preorder: [*, 2, +]
+Inserting 6 as the left child of +.
+Elements in preorder: [*, 2, +, 6]
+Inserting 5 as the right child of +.
+Elements in preorder: [*, 2, +, 6, 5]
+
+The second example.
+Inserting in preorder: - / * + 3 1 3 + - 9 5 2 + * 3 - 7 4 6
+Elements in preorder: [-, /, *, +, 3, 1, 3, +, -, 9, 5, 2, +, *, 3, -, 7, 4, 6]
+Elements in postorder: [3, 1, +, 3, *, 9, 5, -, 2, +, /, 3, 7, 4, -, *, 6, +, -]
+
+Testing ExpressionTree with '- / * + 3 1 3 + - 9 5 2 + * 3 - 7 4 6'
+Evaluating expression tree...
+Result: -13
+
+Testing ExpressionTree with '+ - 496 * 28 6 8128'
+Evaluating expression tree...
+Result: 8456

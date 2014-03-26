@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 8
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 8: The ADT binary tree and expression trees (graded)
+</h2>
+
+<h3>
+Wednesday, March 26
+</h3>
+
+This laboratory assignment will be graded in numerical points.  For this 
+laboratory, unlike the pass/fail laboratories, you are expected to work alone, 
+without any help from others.  You may consult your notes, your previous work 
+and any printed materials, but no Internet access is allowed, except for the 
+course website.  Hand in your solution by the end of the laboratory period. 
+
+
+<h3>
+Objectives
+</h3>
+
+This week, you will work with an node-based implementation of the ADT binary 
+tree and then use this to implement expression trees.
+
+<h3>
+1. Preparation
+</h3>
+
+First, create a directory named <tt>lab8</tt> and download the following JAR 
+(Java ARchive) file by clicking the link provided.  To do this, you need to be 
+on this Laboratory 8 webpage.
+
+<blockquote>
+<a href="lab8.jar"><tt>lab8.jar</tt></a>
+</blockquote>
+
+Once you have downloaded the archive, type the following command from the 
+<tt>lab8</tt> directory.
+
+<blockquote>
+<tt>jar xvf lab8.jar</tt>
+</blockquote>
+
+Your directory should now contain the following twenty <tt>.java</tt> files.
+
+<blockquote>
+<a href="ArrayElementIterator.java"><tt>ArrayElementIterator.java</tt></a><br>
+<a href="ArrayIndexList.java"><tt>ArrayIndexList.java</tt></a><br>
+<a href="BTNode.java"><tt>BTNode.java</tt></a><br>
+<a href="BTPosition.java"><tt>BTPosition.java</tt></a><br>
+<a href="BinaryTree.java"><tt>BinaryTree.java</tt></a><br>
+<a href="BoundaryViolationException.java"><tt>BoundaryViolationException.java</tt></a><br>
+<a href="DNode.java"><tt>DNode.java</tt></a><br>
+<a href="EmptyTreeException.java"><tt>EmptyTreeException.java</tt></a><br>
+<a href="ExpressionTree.java"><tt>ExpressionTree.java</tt></a><br>
+<a href="IndexList.java"><tt>IndexList.java</tt></a><br>
+<a href="IndexOutOfBoundsException.java"><tt>IndexOutOfBoundsException.java</tt>
+</a><br>
+<a href="InvalidPositionException.java"><tt>InvalidPositionException.java</tt></a><br>
+<a href="Iterable.java"><tt>Iterable.java</tt></a><br>
+<a href="Iterator.java"><tt>Iterator.java</tt></a><br>
+<a href="LinkedBinaryTree.java"><tt>LinkedBinaryTree.java</tt></a><br>
+<a href="NonEmptyTreeException.java"><tt>NonEmptyTreeException.java</tt></a><br>
+<a href="NoSuchElementException.java"><tt>NoSuchElementException.java</tt></a><br>
+<a href="Position.java"><tt>Position.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a><br>
+<a href="Tree.java"><tt>Tree.java</tt></a>
+</blockquote>
+
+All but the classes <tt>LinkedBinaryTree</tt>, <tt>ExpressionTree</tt> and 
+<tt>Tester</tt> are completed.
+
+<h3>
+2. The ADT binary tree
+</h3>
+
+<b>The class <tt>LinkedBinaryTree</tt>.</b>
+The class <tt>LinkedBinaryTree</tt> is a node-based implementation of the ADT 
+binary tree.  It is very similar to the class <tt>LinkedBinaryTree</tt> given 
+in &sect;7.3.4, pp. 308&ndash;312, of our main textbook.  The only difference 
+with the textbook version is that this class uses <tt>ArrayIndexList</tt> 
+objects whenever the textbook version uses <tt>NodePositionList</tt> objects 
+(in particular, to implement iterators).  In the class 
+<tt>LinkedBinaryTree</tt>, most of the methods are already implemented.  You 
+are to implement the following two methods according to the given 
+specifications.
+
+<ol>
+<li><tt>preorderElements()</tt>&mdash;Returns an <tt>Iterable</tt> collection 
+  of all the elements in <i>preorder</i>.
+<li><tt>postorderElements()</tt>&mdash;Returns an <tt>Iterable</tt> collection
+  of all the elements in <i>postorder</i>.
+</ol>
+
+For each of these methods, you should create and return an 
+<tt>ArrayIndexList</tt> object as an <tt>Iterable</tt> collection.  You may 
+also add an auxiliary method to perform the preorder/postorder traversal 
+recursively.  A test driver program is provided for you in the file 
+<tt>Tester.java</tt>.  Run this driver to test the correctness of your 
+implementation.  Save a snapshot your test run in a file named 
+<tt>lab8.out</tt>.
+
+<h3>
+3. Expression trees
+</h3>
+
+<b>The class <tt>ExpressionTree</tt>.</b>
+Next, open the file <tt>ExpressionTree.java</tt>.  The class 
+<tt>ExpressionTree</tt> is a subclass of the class <tt>LinkedBinaryTree</tt>, 
+and it is designed to represent expression trees of arithmetic expressions 
+(see also Example 7.9, p. 301, of our main textbook).  In an expression tree, 
+each internal node holds one of the arithmetic operators <tt>+</tt>, 
+<tt>-</tt>, <tt>*</tt> and <tt>/</tt>, and each external node holds integers.  
+We assume that both operators and digits are represented in <tt>String</tt> 
+objects.  In the class <tt>ExpressionTree</tt>, implement the following two 
+methods according to the given specifications.
+
+<ol start="3">
+<li><tt>evaluate()</tt>&mdash;Returns the integer value of the entire 
+  expression tree.
+<li><tt>evaluate(v)</tt>&mdash;Recursively evaluates and returns the integer 
+  value of the expression tree rooted at <tt>v</tt>.
+</ol>
+
+To convert a string, say, <tt>s</tt>, consisting of digits to its 
+corresponding integer value, use the class <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Integer.html"><tt>Integer</tt></a>'s constructor:
+
+<blockquote>
+<pre>
+new Integer(s)
+</pre>
+</blockquote>
+
+To test equality of two strings, say, <tt>s</tt> and <tt>t</tt>, use the 
+class <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html">
+<tt>String</tt></a>'s method:
+
+<blockquote>
+<pre>
+s.equals(t)
+</pre>
+</blockquote>
+
+<b>Testing correctness.</b>
+In the <i>prefix notation</i>, arithmetic operators appear before operands.  
+For example, addition of 1 and 2 in the standard (infix) notation is 
+<tt>1 + 2</tt>, but in the prefix notation it is <tt>+ 1 2</tt>.  It turns out 
+that the preorder traversal of an expression tree yields its expression in the 
+prefix notation.  In the file <tt>Tester.java</tt>, test your implementation 
+with the following arithmetic expressions in the prefix notation as input:
+
+<blockquote>
+<pre>
+- / * + 3 1 3 + - 9 5 2 + * 3 - 7 4 6
++ - 496 * 28 6 8128
+</pre>
+</blockquote>
+
+The method <tt>preorderBuild()</tt> is provided for you to construct an 
+expression tree from an arithmetic expression in the prefix notation.  Save a 
+snapshot your test run in the file <tt>lab8.out</tt>.
+
+<h3>
+4. Documentation with Javadoc
+</h3>
+
+As done before, document your <tt>LinkedBinaryTree.java</tt>, 
+<tt>ExpressionTree.java</tt> and <tt>Tester.java</tt> files using Javadoc 
+tags.  For more details about Javadoc, see pp. 51, 52 of our main textbook or 
+the <a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+5. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>LinkedBinaryTree.java</tt>,
+<tt>ExpressionTree.java</tt>, <tt>Tester.java</tt> and <tt>lab8.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

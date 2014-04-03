@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 9
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 9: Heaps and heapsort
+</h2>
+
+<h3>
+Wednesday, April 2<br>
+Thursday, April 3
+</h3>
+
+As before, you are expected to work with an assigned partner as a pair.  Both 
+you and your partner will receive the same grade.  Both of you should always 
+save your laboratory work on your own accounts. 
+
+<h3>
+Objectives
+</h3>
+
+This week, you will complete a heap-based implementation of the ADT priority 
+queue and then use this to implement heapsort.
+
+<h3>
+1. Preparation
+</h3>
+
+First, create a directory named <tt>lab9</tt> and download the following JAR 
+(Java ARchive) file by clicking the link provided.  To do this, you need to be 
+on this Laboratory 9 webpage.
+
+<blockquote>
+<a href="lab9.jar"><tt>lab9.jar</tt></a>
+</blockquote>
+
+Once you have downloaded the archive, type the following command from the 
+<tt>lab9</tt> directory.
+
+<blockquote>
+<tt>jar xvf lab9.jar</tt>
+</blockquote>
+
+Your directory should now contain the following fifteen <tt>.java</tt> files.
+
+<blockquote>
+<a href="ArrayElementIterator.java"><tt>ArrayElementIterator.java</tt></a><br>
+<a href="ArrayIndexList.java"><tt>ArrayIndexList.java</tt></a><br>
+<a href="Comparator.java"><tt>Comparator.java</tt></a><br>
+<a href="DefaultComparator.java"><tt>DefaultComparator.java</tt></a><br>
+<a href="EmptyPriorityQueueException.java"><tt>EmptyPriorityQueueException.java</tt></a><br>
+<a href="Entry.java"><tt>Entry.java</tt></a><br>
+<a href="HeapPQ.java"><tt>HeapPQ.java</tt></a><br>
+<a href="IndexList.java"><tt>IndexList.java</tt></a><br>
+<a href="IndexOutOfBoundsException.java"><tt>IndexOutOfBoundsException.java</tt></a><br>
+<a href="InvalidKeyException.java"><tt>InvalidKeyException.java</tt></a><br>
+<a href="Iterable.java"><tt>Iterable.java</tt></a><br>
+<a href="Iterator.java"><tt>Iterator.java</tt></a><br>
+<a href="NoSuchElementException.java"><tt>NoSuchElementException.java</tt></a><br>
+<a href="PriorityQueue.java"><tt>PriorityQueue.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a>
+</blockquote>
+
+All but the classes <tt>HeapPQ</tt> and <tt>Tester</tt> are completed.
+
+<h3>
+2. Heaps
+</h3>
+
+The class <tt>HeapPQ</tt> implements the heap-based ADT priority queue using
+the class <tt>ArrayIndexList</tt>.  Recall that, in an array-list-based heap,
+a node <i>v</i> of a heap is stored at the index <i>p</i>(<i>v</i>), where
+the function <i>p</i> is defined as follows (see also p. 354 of our main
+textbook).
+
+<ul>
+<li>If <i>v</i> is the root, then <i>p</i>(<i>v</i>) = 1.
+<li>If <i>v</i> is the left child of a node <i>u</i>, then
+  <i>p</i>(<i>v</i>) = 2<i>p</i>(<i>u</i>).
+<li>If <i>v</i> is the right child of a node <i>u</i>, then
+  <i>p</i>(<i>v</i>) = 2<i>p</i>(<i>u</i>) + 1.
+</ul>
+
+Open the file <tt>HeapPQ.java</tt> and carefully study how this class is
+implemented.  The class <tt>HeapPQ</tt> consists of the following five
+methods (excluding four auxiliary methods).
+
+<ol>
+<li><tt>size()</tt>&mdash;Returns the number of elements in the priority
+  queue.
+<li><tt>isEmpty()</tt>&mdash;Returns whether the priority queue is empty.
+<li><tt>min()</tt>&mdash;Returns (but does not remove) an entry with the
+  minimum key.
+<li><tt>insert(k, x)</tt>&mdash;Inserts a key-value pair <tt>(k, x)</tt> and
+  returns the entry created.
+<li><tt>removeMin()</tt>&mdash;Removes and returns an entry with the minimum
+  key.
+</ol>
+
+Notice that, in &sect;8.3.4, pp. 363&ndash;365, of our main textbook, the
+class <tt>HeapPriorityQueue</tt> is implemented using the class
+<tt>ArrayListCompleteBinaryTree</tt>, which in turn uses the class
+<tt>ArrayList</tt>.  However, our class <tt>HeapPQ</tt> is somewhat
+simplified and implemented using the class <tt>ArrayIndexList</tt> directly.
+Now, in <tt>HeapPQ.java</tt>, implement the methods <tt>insert()</tt> and
+<tt>removeMin()</tt> according to the given specifications.
+
+<h3>
+3. Heapsort
+</h3>
+
+We now revisit the fundamental <i>sorting</i> problem: the problem of 
+re&ouml;rdering the objects in a given sequence so that the objects are 
+placed in the increasing order.  In this laboratory, you are to implement the
+<i>heapsort</i> algorithm using a heap-based priority queue.  The heapsort 
+algorithm has the following two phases (see also &sect;8.3.5, pp. 366, 367, of 
+our main textbook).
+
+<ol>
+<li>Given a sequence <i>S</i> of objects, we first insert the objects of 
+  <i>S</i>, regarding them as both keys and values of entries, into an 
+  initially empty priority queue <i>P</i> one at a time.
+<li>We then remove the entries from <i>P</i>, one at a time, using the method 
+  <tt>removeMin()</tt>, and put the keys (or values) of these entries back 
+  into <i>S</i>.  Since <tt>removeMin()</tt> removes an entry with the 
+  smallest key, the entries are removed in the increasing order.
+</ol>
+
+In the file <tt>Tester.java</tt>, you are to complete the following method.
+
+<blockquote>
+<tt>heapsort(L)</tt>&mdash;Takes an array list <tt>L</tt> of 
+<tt>Comparable</tt> objects and heapsorts the objects of <tt>L</tt> in the 
+increasing order.  
+</blockquote>
+
+When you call the method <tt>insert()</tt> to insert an object into a 
+priority queue, its corresponding key should be the object itself.  To test 
+your <tt>heapsort()</tt> method, run the <tt>main()</tt> method.  Add a code 
+segment to test your <tt>heapsort()</tt> method on lists of strings.  Save a 
+snapshot of your test run in a text file named <tt>lab9.out</tt>. 
+
+<h3>
+4. Documentation with Javadoc
+</h3>
+
+As done before, document your <tt>HeapPQ.java</tt> and <tt>Tester.java</tt> 
+files using Javadoc tags.  For more details about Javadoc, see pp. 51, 52 of 
+our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+5. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>HeapPQ.java</tt>, <tt>Tester.java</tt> and 
+<tt>lab9.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

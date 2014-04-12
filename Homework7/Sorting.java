@@ -5,6 +5,7 @@
  * of comparisons performed.
  *
  * @author Takunari Miyazaki
+ * @author Kevin Liu
  * @see ArrayIndexList
  * @see IndexList
  * @see Integer
@@ -28,37 +29,55 @@ public class Sorting {
     L.set(j, e);
   }
 
-	public static <E> void bubblesort(IndexList<E> L) {
+  /** This method bubble-sorts the elements of an array list L. 
+	 * @param L the array list to be sorted
+	 */
+	public static <E> long bubblesort(IndexList<E> L) {
+		long count = 0;
 		int n = L.size();
 		for (int i = 1; i < n-1; i++)
-			for (int j = 0; j < n-i; j++)
+			for (int j = 0; j < n-i; j++) {
 				if (((Comparable)L.get(j)).compareTo(L.get(j+1)) > 0)
 					swap(L, j, j+1);
+				count++;
+			}
+		return count;
 	}
-	public static <E> void selectionsort(IndexList<E> L) {
+
+  /** This method selection-sorts the elements of an array list L. 
+	 * @param L the array list to be sorted
+	 */
+	public static <E> long selectionsort(IndexList<E> L) {
+		long count = 0;
 		int n = L.size();
 		for (int i = 0; i < n-1; i++) {
 			int minIndex = i;
-			for (int j = i+1; j < n; j++)
+			for (int j = i+1; j < n; j++) {
 				if (((Comparable)L.get(j)).compareTo(L.get(minIndex)) < 0)
 					minIndex = j;
+				count++;
+			}
 			if (minIndex != i)
 				swap(L, i, minIndex);
 			
 		}
+		return count;
 	}
 
 
-  /** This method heap-sorts (in place) the elements of an array list L. */
-  public static <E> void heapsort(IndexList<E> L) {
-
+  /** This method heap-sorts (in place) the elements of an array list L. 
+	 * @param L the array list to be sorted
+	 */
+  public static <E> long heapsort(IndexList<E> L) {
+		long count = 0;
     int n = L.size();
 
     // The first phase builds a heap, one at a time, of heapsize.
     for (int heapsize = 0; heapsize < n; heapsize++) {
-      int i = heapsize;
+			int i = heapsize;
       while (i > 0) {
 				int j = (i - 1)/2;
+				count++;
 				if (((Comparable) L.get(i)).compareTo(L.get(j)) > 0) {
 	  			swap(L, i, j);
 	  			i = j;
@@ -72,6 +91,7 @@ public class Sorting {
 			swap(L, i, heapsize);
 			while (i*2+1 < heapsize) {
 					int bigger = i*2+1;
+					count+=2;
 					if (i*2+2 < heapsize && (((Comparable)L.get(i*2+2)).compareTo(L.get(i*2+1)) > 0)) 
 						bigger = i*2+2;
 					if (((Comparable)L.get(bigger)).compareTo(L.get(i)) > 0)
@@ -79,7 +99,9 @@ public class Sorting {
 					else break;
 					i = bigger;
 			} 
-		}	
+		}
+		
+		return count;	
 	}
 
   /** This method compares the performaces of sorting algorithms. */
@@ -119,8 +141,25 @@ public class Sorting {
 		selectionsort(L20);
 		System.out.print("Output: ");
 		printIndexList(L20);
-
+		
+		// Print comparision
+		for (int n = 10; n <= 100000; n*=10) {
+			IndexList<Integer> Lb = new ArrayIndexList<Integer>();
+			IndexList<Integer> Ls = new ArrayIndexList<Integer>();
+			IndexList<Integer> Lh = new ArrayIndexList<Integer>();
+			for (int i = 0; i < n; i++) {
+				Lb.add(i, new Integer(Math.abs(r.nextInt()) % n));
+				Ls.add(i, new Integer(Math.abs(r.nextInt()) % n));
+				Lh.add(i, new Integer(Math.abs(r.nextInt()) % n));
+			}
+			long count_b = bubblesort(Lb);
+			long count_s = selectionsort(Ls);
+			long count_h = heapsort(Lh);
+			System.out.println("For n = "+n+", bubble sort performs "+count_b+" comparisions.");
+			System.out.println("For n = "+n+", selection sort performs "+count_s+" comparisions.");
+			System.out.println("For n = "+n+", heap sort performs "+count_h+" comparisions.");
+		}
 
   }
 
-}
+}	

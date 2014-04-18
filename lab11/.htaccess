@@ -1,0 +1,5 @@
+AuthUserFile /home/miyazaki/courses/cpsc215/passwd/.htpasswd
+AuthName "Restricted Area"
+AuthType Basic
+
+require valid-user

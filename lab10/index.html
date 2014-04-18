@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 10
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 10: Hash tables using linear probing
+</h2>
+
+<h3>
+Wednesday, April 9<br>
+Thursday, April 10
+</h3>
+
+As before, you are expected to work with an assigned partner as a pair.  Both 
+you and your partner will receive the same grade.  Both of you should always 
+save your laboratory work on your own accounts. 
+
+<h3>
+Objectives
+</h3>
+
+This week, you will complete and test a hash-table-based implementation of the 
+ADT dictionary using linear probing for collision handling.
+
+<h3>
+1. Preparation
+</h3>
+
+First, create a directory named <tt>lab10</tt> and download the following JAR 
+(Java ARchive) file by clicking the link provided.  To do this, you need to be 
+on this Laboratory 10 webpage.
+
+<blockquote>
+<a href="lab10.jar"><tt>lab10.jar</tt></a>
+</blockquote>
+
+Once you have downloaded the archive, type the following command from the 
+<tt>lab10</tt> directory.
+
+<blockquote>
+<tt>jar xvf lab10.jar</tt>
+</blockquote>
+
+Your directory should now contain the following fourteen <tt>.java</tt> files.
+
+<blockquote>
+<a href="ArrayElementIterator.java"><tt>ArrayElementIterator.java</tt></a><br>
+<a href="ArrayIndexList.java"><tt>ArrayIndexList.java</tt></a><br>
+<a href="Dictionary.java"><tt>Dictionary.java</tt></a><br>
+<a href="Entry.java"><tt>Entry.java</tt></a><br>
+<a href="FullHashTableException.java"><tt>FullHashTableException.java</tt></a><br>
+<a href="HashTableDictionary.java"><tt>HashTableDictionary.java</tt></a><br>
+<a href="IndexList.java"><tt>IndexList.java</tt></a><br>
+<a href="IndexOutOfBoundsException.java"><tt>IndexOutOfBoundsException.java</tt></a><br>
+<a href="InvalidEntryException.java"><tt>InvalidEntryException.java</tt></a><br>
+<a href="InvalidKeyException.java"><tt>InvalidKeyException.java</tt></a><br>
+<a href="Iterable.java"><tt>Iterable.java</tt></a><br>
+<a href="Iterator.java"><tt>Iterator.java</tt></a><br>
+<a href="NoSuchElementException.java"><tt>NoSuchElementException.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a>
+</blockquote>
+
+All but the classes <tt>HashTableDictionary</tt> and <tt>Tester</tt> are 
+completed. 
+
+<h3>
+2. The ADT dictionary
+</h3>
+
+The ADT dictionary is defined by the following seven methods.  In the ADT 
+map, all entries must have distinct keys; however, in this ADT dictionary, 
+different entries may share the same key.
+
+<ol>
+<li><tt>size()</tt>&mdash;Returns the number of entries in the dictionary.
+<li><tt>isEmpty()</tt>&mdash;Returns whether the dictionary is empty.
+<li><tt>get(k)</tt>&mdash;Returns an entry whose key is equal to a given key 
+  <tt>k</tt>.
+<li><tt>getAll(k)</tt>&mdash;Returns an iterable collection of all entries 
+  whose keys are equal to a given key <tt>k</tt>.
+<li><tt>put(k, x)</tt>&mdash;Puts an entry with a given key <tt>k</tt> and 
+  value <tt>x</tt> into the dictionary, returning the entry created.
+<li><tt>remove(e)</tt>&mdash;Removes from the dictionary a given entry 
+  <tt>e</tt>, returning the removed entry.
+<li><tt>entrySet()</tt>&mdash;Returns an iterable collection of all key-value 
+  entries in the dictionary.
+</ol>
+
+The class <tt>HashTableDictionary</tt> implements the ADT dictionary using a 
+hash table, where linear probing is used for collision handling.  Except for 
+the two methods <tt>getAll()</tt> and <tt>entrySet()</tt>, all of the above 
+methods are implemented.  Study carefully how this class is designed.  A 
+<i>hash function</i> is defined in the method <tt>hashValue()</tt> using the 
+simple <i>division method</i> (see also p. 396 of our main textbook).
+
+<p>
+<b>Getting all entries.</b>
+To complete the implementation of the ADT dictionary, complete the methods
+<tt>getAll()</tt> and <tt>entrySet()</tt> according to the specifications 
+given above.  As usual, for iterable collections, use the class 
+<tt>ArrayIndexList</tt>.  In the method <tt>getAll()</tt>, you should begin 
+your search from the index returned by the auxiliary method 
+<tt>findEntry()</tt>.  A partially completed test driver program is provided 
+for you in the file <tt>Tester.java</tt>.  Using iterators, add code to 
+<tt>Tester.java</tt> to test your implementation.
+
+<p>
+<b>Removing all entries.</b>
+Now, in the class <tt>HashTableDictionary</tt>, implement the following 
+additional method according to the given specification.
+
+<ol start="8">
+<li><tt>removeAll(k)</tt>&mdash;Removes all entries whose keys are equal to a 
+  given key k and returns the removed entries in an iterable collection.  
+</ol>
+
+You should begin your search from the index given by the auxiliary method 
+<tt>findEntry()</tt>.  Using iterators, add code to <tt>Tester.java</tt> to 
+test your implementation.  Once completed, save a snapshot of your test run in 
+a text file named <tt>lab10.out</tt>. 
+
+<h3>
+3. Documentation with Javadoc
+</h3>
+
+As done before, document your <tt>HashTableDictionary.java</tt> and 
+<tt>Tester.java</tt> files using Javadoc tags.  For more details about 
+Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+4. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>HashTableDictionary.java</tt>, 
+<tt>Tester.java</tt> and <tt>lab10.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

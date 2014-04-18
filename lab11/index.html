@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Laboratory 11
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Laboratory 11: Java APIs and word frequencies
+</h2>
+
+<h3>
+Wednesday, April 16<br>
+Thursday, April 17
+</h3>
+
+
+As before, you are expected to work with an assigned partner as a pair.  Both 
+you and your partner will receive the same grade.  Both of you should always 
+save your laboratory work on your own accounts. 
+
+<h3>
+Objectives
+</h3>
+
+This week, using Java APIs (Application Programming Interfaces), you will 
+implement a Java application to count the number of occurrences of each word 
+in a given text file.  For this, you are to use the APIs
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/Collections.html"><tt>Collections</tt></a>,
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/ArrayList.html"><tt>ArrayList</tt></a> and
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/TreeMap.html"><tt>TreeMap</tt></a>.
+
+<h3>
+1. Preparation
+</h3>
+
+First, copy the following two <tt>.java</tt> and two <tt>.txt</tt> files into 
+your disk space.  To do this, you will need to be on this Laboratory 11 
+webpage and follow the links provided below.
+
+<blockquote>
+<a href="MapEntryComparator.java"><tt>MapEntryComparator.java</tt></a><br>
+<a href="WordCount.java"><tt>WordCount.java</tt></a><br>
+<a href="shorttale.txt"><tt>shorttale.txt</tt></a><br>
+
+<a href="tale.txt"><tt>tale.txt</tt></a>
+</blockquote>
+
+The text file <tt>tale.txt</tt> contains the entire text of <i>A Tale of Two 
+Cities</i>, a novel by Charles Dickens.  The text file <tt>shorttale.txt</tt>
+contains an excerpt of this novel.  Both are to be used as input text files.
+You are to complete the classes <tt>MapEntryComparator</tt> and 
+<tt>WordCount</tt>.
+
+<h3>
+2. Counting word frequencies
+</h3>
+
+The <tt>main()</tt> method in the class <tt>WordCount</tt> should do all of 
+the following: (i) read input text, (ii) analyze it using appropriate APIs and 
+then (iii) output the results.  For output, the <tt>main()</tt> method should 
+display the list of all words and their number of occurrences in both the 
+alphabetical and most-to-least frequent orders.
+
+<p>
+<b>Reading input.</b>
+
+In the <tt>main()</tt> method in the class <tt>WordCount</tt>, you are 
+provided code segment to read an input text file into a string named 
+<tt>inString</tt>.  This code assumes that the name of an input file is 
+specified in the command line in the following way.
+
+<blockquote>
+<pre>
+java WordCount tale.txt
+</pre>
+</blockquote>
+
+This code then uses the class <a href="http://download.oracle.com/javase/6/docs/api/java/util/StringTokenizer.html"><tt>java.util.StringTokenizer</tt></a> to 
+break the input string into individual words.  Notice how the delimiters are 
+specified to avoid punctuation marks and line feeds.
+
+<p>
+<b>Constructing a map.</b>
+Your program should next construct a <i>map</i>, as an instance of the ADT 
+map, consisting of key-value pairs, where keys are words, and values are 
+the numbers of occurrences.  For a map, use the class
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/TreeMap.html"><tt>java.util.TreeMap</tt></a>.  For key-value pairs, use the interface 
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/Map.Entry.html"><tt>java.util.Map.Entry</tt></a>.  As it scans each word, your program should 
+add or update its corresponding entry with the number of occurrences it has 
+seen so far.
+
+<p>
+<b>Generating a list of words and their frequencies.</b>
+Once a map is filled with all words and their frequencies, it is easy to 
+generate a list of words and their frequencies in the alphabetical order.  
+All you need to do is to invoke the method <tt>entrySet()</tt> in the class 
+<tt>TreeMap</tt>.  The resulting list from <tt>shorttale.txt</tt> in the 
+alphabetical order should look like:
+
+<blockquote>
+<pre>
+[a=11, after=1, age=2, all=2, america=1, and=7, ..., year=2, years=1, yet=1]
+</pre>
+</blockquote>
+
+<b>Sorting by frequency.</b>
+The final task is to sort the list of words and their frequencies according 
+to the most-to-least frequent order.  For this, you should invoke the 
+static method <tt>Collections.sort()</tt> in the class
+<a href="http://download.oracle.com/javase/6/docs/api/java/util/Collections.html"><tt>java.util.Collections</tt></a>.  In addition to the list itself, the 
+method <tt>Collections.sort()</tt> requires an appropriate <tt>Comparator</tt> 
+object.  Open the file <tt>MapEntryComparator.java</tt> and complete the 
+method <tt>compare()</tt> to define an appropriate order on 
+<tt>Map.Entry&lt;String, Integer&gt;</tt> objects.  When invoking the method 
+<tt>Collections.sort()</tt>, pass the list and a <tt>MapEntryComparator</tt> 
+object as arguments.  The resulting list from <tt>shorttale.txt</tt> in the 
+most-to-least frequent order should look like:
+
+<blockquote>
+<pre>
+[the=31, of=25, was=13, it=12, a=11, in=8, and=7, ..., worst=1, years=1, yet=1]
+</pre>
+</blockquote>
+
+When completed, save a snapshot of your test run on <tt>shorttale.txt</tt> in 
+a text file named <tt>lab11.out</tt>.
+
+<h3>
+3. Documentation with Javadoc
+</h3>
+
+As done before, document your <tt>MapEntryComparator.java</tt> and 
+<tt>WordCount.java</tt> files using Javadoc tags.  For more details about 
+Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+4. What to hand in
+</h3>
+
+Upon completion of your laboratory, have your work checked by the instructor 
+or TA.  Turn in hard copies of <tt>MapEntryComparator.java</tt>, 
+<tt>WordCount.java</tt> and <tt>lab11.out</tt>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="../"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

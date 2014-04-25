@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta name="Author" content="Takunari Miyazaki">
+<link rel="shortcut icon" href="/~miyazaki/images/favicon.ico" type="image/vnd.microsoft.icon">
+<title>
+CPSC 215L: Project 2
+</title>
+<style type="text/css">
+a {text-decoration: none;}
+body {background-color: #FFEEDD;}
+</style>
+</head>
+
+<body>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td height="55">
+<b><font size="+2">CPSC 215L: Data Structures and Algorithms</font></b>
+</td>
+<td align="right">
+<b><font size="+1">Spring 2014</font></b>
+</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>
+Project 2
+</h2>
+
+<h3>
+Due Monday, April 28
+</h3>
+
+<h3>
+1. Preparation
+</h3>
+
+For this project, you are to implement an interactive telephone directory of 
+Trinity students using the ADT map.  To implement the ADT map, you are to use 
+a binary search tree as an underlying construct.  First, create a directory 
+named <tt>project2</tt> and download the following JAR (Java ARchive) file 
+into the <tt>project2</tt> directory by clicking the link provided.  To do 
+this, you need to be on this Project 2 webpage.
+
+<blockquote>
+<a href="project2.jar"><tt>project2.jar</tt></a>
+</blockquote>
+
+Once you have downloaded the archive, type the following UNIX command from the 
+<tt>project2</tt> directory.
+
+<blockquote>
+<tt>jar xvf project2.jar</tt>
+</blockquote>
+
+Your directory should now contain the following 26 <tt>.java</tt> files.
+
+<blockquote>
+<a href="BTNode.java"><tt>BTNode.java</tt></a><br>
+<a href="BTPosition.java"><tt>BTPosition.java</tt></a><br>
+<a href="BinarySearchTreeMap.java"><tt>BinarySearchTreeMap.java</tt></a><br>
+<a href="BinaryTree.java"><tt>BinaryTree.java</tt></a><br>
+<a href="BoundaryViolationException.java"><tt>BoundaryViolationException.java</tt></a><br>
+<a href="Comparator.java"><tt>Comparator.java</tt></a><br>
+<a href="DNode.java"><tt>DNode.java</tt></a><br>
+<a href="DefaultComparator.java"><tt>DefaultComparator.java</tt></a><br>
+<a href="ElementIterator.java"><tt>ElementIterator.java</tt></a><br>
+<a href="EmptyListException.java"><tt>EmptyListException.java</tt></a><br>
+<a href="EmptyTreeException.java"><tt>EmptyTreeException.java</tt></a><br>
+<a href="Entry.java"><tt>Entry.java</tt></a><br>
+<a href="InvalidEntryException.java"><tt>InvalidEntryException.java</tt></a><br>
+<a href="InvalidKeyException.java"><tt>InvalidKeyException.java</tt></a><br>
+<a href="InvalidPositionException.java"><tt>InvalidPositionException.java</tt></a><br>
+<a href="Iterable.java"><tt>Iterable.java</tt></a><br>
+<a href="Iterator.java"><tt>Iterator.java</tt></a><br>
+<a href="LinkedBinaryTree.java"><tt>LinkedBinaryTree.java</tt></a><br>
+<a href="Map.java"><tt>Map.java</tt></a><br>
+<a href="NoSuchElementException.java"><tt>NoSuchElementException.java</tt></a><br>
+<a href="NodePositionList.java"><tt>NodePositionList.java</tt></a><br>
+<a href="NonEmptyTreeException.java"><tt>NonEmptyTreeException.java</tt></a><br>
+<a href="Position.java"><tt>Position.java</tt></a><br>
+<a href="PositionList.java"><tt>PositionList.java</tt></a><br>
+<a href="Tester.java"><tt>Tester.java</tt></a><br>
+<a href="Tree.java"><tt>Tree.java</tt></a>
+</blockquote>
+
+All but the classes <tt>BinarySearchTreeMap</tt> and <tt>Tester</tt> are 
+completed.
+
+<h3>
+2. Interactive telephone directory
+</h3>
+
+You are to implement an interactive telephone directory of Trinity students 
+using the ADT map.  Each <i>entry</i> in this map is a pair of 
+<tt>String</tt> and <tt>Integer</tt> objects:
+
+<ul>
+<li> a name (a last name followed by a first name) and
+<li> a five-digit campus telephone number.
+</ul>
+
+We regard a name as a <i>key</i> and a telephone number as a <i>value</i> of 
+an entry.  You may assume that no two people have the same name.  You may 
+also assume that no telephone number begins with 0.  Your telephone directory 
+should be an iteractive command-line Java application.  It should be 
+menu-driven and support the following seven basic operations.
+
+<ol>
+<li>Search an entry in the directory; in particular, given a name as input 
+  from the user, output the name and his/her telephone number if his/her 
+  entry is in the directory.
+<li>Add a new entry for a given name and telephone number to the directory.
+<li>Remove an entry from the directory; in particular, given a name as input 
+  from the user, remove his/her entry from the directory.
+<li>List all entries (as legible name-number pairs) from the directory in the 
+  alphabetical order by last names.
+<li>List all names from the directory.
+<li>List all telephone numbers from the directory.
+<li>Terminate the session.
+</ol>
+
+Your program should continue to display the menu and ask for a command until 
+the user specifies to terminate.  Overall, it should be user-friendly and 
+robust.  <i>Your implementation must be compatible with all of the interfaces 
+and classes provided</i>.  As before, your Java application should be named 
+with your last name (e.g., <tt>Miyazaki.java</tt>). 
+
+<h3>
+3. Underlying constructs
+</h3>
+
+Your telephone directory is to be built on the ADT map.  For the ADT map, 
+you are to implement and use the class <tt>BinarySearchTreeMap</tt> as 
+instructed below.
+
+<p>
+<b>The class <tt>LinkedBinaryTree</tt>.</b>
+This is completed.  This class is identical to the class 
+<tt>LinkedBinaryTree</tt> from <a href="../lab7/">Laboratory 7</a> (also 
+discussed in &sect;7.3.4, pp. 305&ndash;313, of our main textbook).
+
+<p>
+<b>The class <tt>BinarySearchTreeMap</tt>.</b>
+This is a subclass of the class <tt>LinkedBinaryTree</tt> and implements 
+the interface <tt>Map</tt>.  This class is identical to the class 
+<tt>BinarySearchTreeMap</tt> discussed in &sect;10.1.3, pp. 443&ndash;446, of 
+our main textbook.  This class is completed except for the following five 
+methods.  Implement these methods according to the following specifications.
+
+<ol>
+<li><tt>insertAtExternal(v, e)</tt>&mdash;inserts a given entry <tt>e</tt> at 
+  a given external node <tt>v</tt>, expanding <tt>v</tt> to be internal with 
+  empty external children, and then returns <tt>e</tt>.
+<li><tt>removeExternal(v)</tt>&mdash;removes a given external node <tt>v</tt> 
+  and its parent, replacing <tt>v</tt>'s parent with <tt>v</tt>'s sibling.
+<li><tt>keySet()</tt>&mdash;returns an iterable collection of the keys of all 
+  entries stored in the map (in inorder).
+<li><tt>values()</tt>&mdash;returns an iterable collection of the values of 
+  all entries stored in the map (in inorder).
+<li><tt>entrySet()</tt>&mdash;returns an iterable collection of all entries 
+  (in inorder). 
+</ol>
+
+Use node lists for iterable collections in the methods <tt>keySet()</tt>, 
+<tt>values()</tt> and <tt>entrySet()</tt>.  You are free to define as many 
+<tt>private</tt> auxiliary methods as you wish.
+
+<p>
+<b>The class <tt>Tester</tt>.</b>
+This is a simple test driver application to test your implementation of the 
+class <tt>BinarySearchTreeMap</tt>.  You are to complete this application to 
+perform the following.
+
+<ol>
+<li>Insert all strings contained in the array <tt>S</tt> into the binary 
+  search tree <tt>bst</tt> using the strings as keys and arbitrary integers 
+  as values.
+<li>Print all entries as legible key-value pairs using the method 
+  <tt>entrySet()</tt>.
+<li>Test the methods <tt>get()</tt>, <tt>put()</tt> and <tt>remove()</tt>.
+<li>Print all values using the method <tt>values()</tt>.
+<li>Print all keys using the method <tt>keySet()</tt>.
+</ol>
+
+Once completed, run the class <tt>Tester</tt> and save a snapshot of your 
+test run in a file named <tt>project2.out</tt>. 
+
+<p>
+<b>Implementing a telephone directory.</b>
+After confirming that the class <tt>BinarySearchTreeMap</tt> has been 
+correctly implemented using the class <tt>Tester</tt>, implement an 
+interactive telephone directory according to the specifications given above.
+
+<h3>
+4. Documentation
+</h3>
+
+As done before, document your <tt>BinarySearchTreeMap.java</tt>, 
+<tt>Tester.java</tt> and <tt>LastName.java</tt> files using Javadoc tags.  
+For more details about Javadoc, see pp. 51, 52 of our main textbook or the 
+<a href="http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html">Javadoc Tool Home Page</a>.
+
+<h3>
+5. What to hand in
+</h3>
+
+Archive the three source files <tt>BinarySearchTreeMap.java</tt>, 
+<tt>Tester.java</tt> and <tt>LastName.java</tt> in a single JAR file named 
+with your last name (e.g., <tt>miyazaki.jar</tt>).  The following UNIX 
+command creates a JAR file named <tt>miyazaki.jar</tt> consisting of 
+<tt>Class1.java</tt>, ..., <tt>ClassN.java</tt>.
+
+<blockquote>
+<tt>jar cvf miyazaki.jar Class1.java ... ClassN.java</tt>
+</blockquote>
+
+Submit your JAR file to this Moodle site:
+
+<blockquote>
+<a href="http://moodle.trincoll.edu/mod/assign/view.php?id=139363"><tt>http://moodle.trincoll.edu/mod/assign/view.php?id=139363</tt></a>
+</blockquote>
+
+Also, submit the following in paper.
+
+<ol>
+<li>The final versions of <tt>BinarySearchTreeMap.java</tt>, 
+<tt>Tester.java</tt> and <tt>LastName.java</tt>.  
+<li>The output file <tt>project2.out</tt> showing the result of your test run 
+  as instructed above.
+</ol>
+
+For a tutorial on JAR files, see <a href="http://docs.oracle.com/javase/tutorial/deployment/jar/">Lesson: Packaging Programs in JAR Files</a>.
+
+
+<h3>
+Plagiarism and academic dishonesty
+</h3>
+
+Remember, under any circumstance, you must not copy part or all of another's 
+work and present it as your own.  For more details, read 
+<a href="../policies.html#plagiarism">our course policy on plagiarism and 
+academic dishonesty</a>.
+
+<br>
+<br>
+<hr>
+
+<table border="0" cellspacing="0">
+<tr>
+<td height="48" width="36">
+<a href="./"><img src="/~miyazaki/images/soroban.gif" width="24" alt="*" align="middle" hspace="6" border="0"></a>
+</td>
+<td valign="middle">
+<a href="../"><b><font size="+1">CPSC 215L home page</font></b></a>
+</td>
+</tr>
+</table>
+
+<table border="0" cellspacing="0" width="100%">
+<tr>
+<td width="80%" align="left" valign="bottom">
+<script type="text/javascript">
+<!--
+var docHdg = "";
+docHdg += "<font size='-1'>";
+docHdg += "<a href='/'>Computer Science Department<\/a><br>";
+docHdg += "<a href='http://www.trincoll.edu/'>Trinity College<\/a><br>";
+docHdg += "300 Summit Street<br>";
+docHdg += "Hartford, Connecticut 06106-3100<br>";
+docHdg += "<br>";
+docHdg += "The current URL is ";
+docHdg += document.location;
+docHdg += "<br>";
+docHdg += "This file was modified on ";
+docHdg += document.lastModified;
+docHdg += "<br>";
+docHdg += "<\/font>";
+document.open();
+document.write(unescape(docHdg));
+//-->
+</script>
+</td>
+<td width="20%" align="right" valign="bottom">
+<a href="http://validator.w3.org/check/referer"><img border="0" src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"></a>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

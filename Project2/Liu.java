@@ -84,7 +84,7 @@ public class Liu {
 					case 4:	Iterator<Entry<String,Integer>> it = phonebook.entrySet().iterator();
 									while (it.hasNext()) {
 										Entry<String,Integer> current = it.next();
-										System.out.println("\t"+current.getKey()+"\t- "+current.getValue());
+										System.out.println("\t"+current.getKey()+" - "+current.getValue());
 									}
 									break;
 					case 5: Iterator<String> kit = phonebook.keySet().iterator();

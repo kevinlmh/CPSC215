@@ -57,7 +57,7 @@ public class Liu {
 									if (searchresult != null)
 										System.out.println("Campusphone number: " + searchresult);
 									else
-										System.out.println("Name not found");
+										System.out.println("Name not found.");
 									break;	
 					case 2: System.out.print("Please enter name (Last First): ");
 									String addname = scanner.next();
@@ -80,6 +80,7 @@ public class Liu {
 										removename = scanner.next();
 									}
 									phonebook.remove(removename);
+									System.out.println(removename+" has been removed.");
 									break;
 					case 4:	Iterator<Entry<String,Integer>> it = phonebook.entrySet().iterator();
 									while (it.hasNext()) {
@@ -102,7 +103,7 @@ public class Liu {
 					case 7: scanner.close();
 									System.exit(0);
 									break;
-					default: System.out.println("Please enter a number between 1 and 7");
+					default: System.out.println("Please enter a number between 1 and 7.");
 									break;
 				}
 			} catch (InputMismatchException e) {

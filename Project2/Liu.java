@@ -79,8 +79,10 @@ public class Liu {
 										System.out.print("Please enter name in \'Last First\' format: ");
 										removename = scanner.next();
 									}
-									phonebook.remove(removename);
-									System.out.println(removename+" has been removed.");
+									if (phonebook.remove(removename) != null)
+										System.out.println(removename+" has been removed.");
+									else 
+										System.out.println("Person not in directory.");
 									break;
 					case 4:	Iterator<Entry<String,Integer>> it = phonebook.entrySet().iterator();
 									while (it.hasNext()) {

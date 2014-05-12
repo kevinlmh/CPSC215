@@ -1,0 +1,204 @@
+mliu2@syslab03:/home3/mliu2/cs215/Project2$ java Tester
+alpha - 1003
+beta - 1002
+delta - 1004
+epsilon - 1006
+gamma - 1000
+lambda - 1005
+phi - 1001
+zeta - 1007
+Inserting new entry kevin - 9999...
+alpha - 1003
+beta - 1002
+delta - 1004
+epsilon - 1006
+gamma - 1000
+kevin - 9999
+lambda - 1005
+phi - 1001
+zeta - 1007
+Getting the entry with key lambda...
+lambda - 1005
+Removing the entry kevin - 9999...
+alpha - 1003
+beta - 1002
+delta - 1004
+epsilon - 1006
+gamma - 1000
+lambda - 1005
+phi - 1001
+zeta - 1007
+Printing all values...
+1003
+1002
+1004
+1006
+1000
+1005
+1001
+1007
+Printing all keys...
+alpha
+beta
+delta
+epsilon
+gamma
+lambda
+phi
+zeta
+
+mliu2@syslab03:/home3/mliu2/cs215/Project2$ java Liu
+
+=== Trinity Telephone Directory ===
+ Author: Kevin Liu   Version: 1.0
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>2
+Please enter name (Last First): Miyazaki Takunari
+Please enter campus phone number: 10001
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>2
+Please enter name (Last First): Yoon Peter
+Please enter campus phone number: 10002
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>2
+Please enter name (Last First): Ridgway John
+Please enter campus phone number: 10003
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>4
+	Miyazaki Takunari - 10001
+	Ridgway John - 10003
+	Yoon Peter - 10002
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>5
+	Miyazaki Takunari
+	Ridgway John
+	Yoon Peter
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>6
+	10001
+	10003
+	10002
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>3
+Please enter name to be removed (Last First): Liu Kevin
+Person not in directory.
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>2
+Please enter name (Last First): liu kevin
+Please enter name in 'Last First' format: Kevin $$
+Please enter name in 'Last First' format: Kevin 123
+Please enter name in 'Last First' format: Liu Kevin
+Please enter campus phone number: ####
+Invalid Input! Please enter an integer.
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>2
+Please enter name (Last First): Liu Kevin
+Please enter campus phone number: 10004
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>4
+	Liu Kevin - 10004
+	Miyazaki Takunari - 10001
+	Ridgway John - 10003
+	Yoon Peter - 10002
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>3
+Please enter name to be removed (Last First): Liu Kevin
+Liu Kevin has been removed.
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>1
+Please enter name (Last First): Miyazaki Takunari
+Campusphone number: 10001
+Main Menu:
+1. Search
+2. Add
+3. Remove
+4. List all names and numbers
+5. List all names
+6. List all numbers
+7. Quit
+>7
+mliu2@syslab03:/home3/mliu2/cs215/Project2$ 

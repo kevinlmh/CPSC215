@@ -256,7 +256,7 @@ public class BinarySearchTreeMap<K,V> extends LinkedBinaryTree<Entry<K,V>>
 	 * @param v the starting position
 	 * @param list the position list you want to store positions in
 	 */
-	protected void inorderPositions(Position<Entry<K,V>> v, PositionList<Position<Entry<K,V>>> list) {
+	private void inorderPositions(Position<Entry<K,V>> v, PositionList<Position<Entry<K,V>>> list) {
 		if (hasLeft(v))
 			inorderPositions(left(v), list);
 		list.addLast(v);
